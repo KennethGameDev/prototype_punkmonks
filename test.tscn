@@ -1,9 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://bqh3hnbxi1inm"]
+[gd_scene load_steps=5 format=3 uid="uid://bqh3hnbxi1inm"]
 
-[ext_resource type="Texture2D" uid="uid://bio5b11p0453e" path="res://icon.svg" id="1_8rkvg"]
+[ext_resource type="Texture2D" uid="uid://uusoq5qtmbl6" path="res://assets/groundWIP.png" id="1_frqq2"]
 
-[node name="Node" type="Node"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mi6x"]
+albedo_color = Color(0.37212, 0.56, 0.2184, 1)
+albedo_texture = ExtResource("1_frqq2")
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(534, 287)
-texture = ExtResource("1_8rkvg")
+[sub_resource type="PlaneMesh" id="PlaneMesh_p53rg"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gvjxq"]
+
+[node name="WorldRoot" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.840623, 0.54162, 0, -0.54162, 0.840623, 0, 1.91871, 2.35462)
+projection = 1
+near = 0.183
+
+[node name="FloorPlane" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.305, 0, 0, 0, 3.305, 0, 0, 0, 3.305, 0, 0.162664, -2.63421)
+material_override = SubResource("StandardMaterial3D_2mi6x")
+mesh = SubResource("PlaneMesh_p53rg")
+skeleton = NodePath("../Camera3D")
+
+[node name="SizeReference" type="MeshInstance3D" parent="FloorPlane"]
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0.0127822, 0.800868)
+mesh = SubResource("CylinderMesh_gvjxq")
+skeleton = NodePath("../../Camera3D")
