@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqh3hnbxi1inm"]
+[gd_scene load_steps=10 format=3 uid="uid://bqh3hnbxi1inm"]
 
 [ext_resource type="Texture2D" uid="uid://uusoq5qtmbl6" path="res://assets/groundWIP.png" id="1_frqq2"]
+[ext_resource type="PackedScene" uid="uid://ceanqkw7t767j" path="res://player.tscn" id="2_jy7fi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2mi6x"]
 albedo_color = Color(0.37212, 0.56, 0.2184, 1)
@@ -10,20 +11,45 @@ albedo_texture = ExtResource("1_frqq2")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_gvjxq"]
 
-[node name="WorldRoot" type="Node3D"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0fgxy"]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.840623, 0.54162, 0, -0.54162, 0.840623, 0, 1.91871, 2.35462)
-projection = 1
-near = 0.183
+[sub_resource type="Sky" id="Sky_3a8xq"]
+sky_material = SubResource("ProceduralSkyMaterial_0fgxy")
+
+[sub_resource type="Environment" id="Environment_66612"]
+background_mode = 2
+sky = SubResource("Sky_3a8xq")
+ambient_light_color = Color(0.270682, 0.583149, 0.68834, 1)
+reflected_light_source = 2
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8e8jb"]
+dof_blur_far_distance = 0.01
+
+[node name="WorldRoot" type="Node3D"]
 
 [node name="FloorPlane" type="MeshInstance3D" parent="."]
 transform = Transform3D(3.305, 0, 0, 0, 3.305, 0, 0, 0, 3.305, 0, 0.162664, -2.63421)
 material_override = SubResource("StandardMaterial3D_2mi6x")
 mesh = SubResource("PlaneMesh_p53rg")
-skeleton = NodePath("../Camera3D")
+skeleton = NodePath("")
 
 [node name="SizeReference" type="MeshInstance3D" parent="FloorPlane"]
 transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0.0127822, 0.800868)
 mesh = SubResource("CylinderMesh_gvjxq")
-skeleton = NodePath("../../Camera3D")
+skeleton = NodePath("")
+
+[node name="Player" parent="." instance=ExtResource("2_jy7fi")]
+transform = Transform3D(0.009, 0, 0, 0, 0.00636396, 0.00636396, 0, -0.00636396, 0.00636396, -0.0738586, 0.209084, 0.0208325)
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(111.111, 0, 0, 0, 111.111, 0, 0, 0, 111.111, 0, 0, 55.4761)
+projection = 1
+size = 0.6
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.594135, 0.804365, 0, -0.804365, 0.594135, 0, 2.7731, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_66612")
+camera_attributes = SubResource("CameraAttributesPractical_8e8jb")

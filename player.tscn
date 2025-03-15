@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ceanqkw7t767j"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_0t8bi"]
+[ext_resource type="Texture2D" uid="uid://bes7r1hoso25" path="res://assets/monk_placeholder_walk0.png" id="1_pxp4x"]
+[ext_resource type="Texture2D" uid="uid://o8dfq3y85fkm" path="res://assets/monk_placeholder_walk1.png" id="2_3u1n2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6f18p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pxp4x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3u1n2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qio35"]
+size = Vector3(5.98453, 10.3776, 5.7998)
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(0.015, 0, 0, 0, 0.015, 0, 0, 0, 0.015, 0, 0, 0)
+script = ExtResource("1_0t8bi")
+
+[node name="Pivot" type="Node3D" parent="."]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Pivot"]
+cast_shadow = 2
+shaded = true
+sprite_frames = SubResource("SpriteFrames_6f18p")
+animation = &"walk"
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_qio35")
