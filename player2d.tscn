@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdj2whxfblwj"]
+
+[ext_resource type="Texture2D" uid="uid://4c0u53igto0o" path="res://assets/WIPpunkmonk.png" id="1_pejtf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pejtf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pejtf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -32)
+sprite_frames = SubResource("SpriteFrames_pejtf")
