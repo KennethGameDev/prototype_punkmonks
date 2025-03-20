@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://spff2xjmeek6"
-path="res://.godot/imported/Test_Ground_Tiles_Upscaled_2x.png-5df2f48e7d23adc513a9f49f712757c3.ctex"
+uid="uid://b8oja6ewolukm"
+path="res://.godot/imported/Test_Ground_Tiles_Upscaled_4x.png-56f48860fb6f246ce4f2e1b58f5317bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Test_Ground_Tiles_Upscaled_2x.png"
-dest_files=["res://.godot/imported/Test_Ground_Tiles_Upscaled_2x.png-5df2f48e7d23adc513a9f49f712757c3.ctex"]
+source_file="res://assets/environment/Test_Ground_Tiles_Upscaled_4x.png"
+dest_files=["res://.godot/imported/Test_Ground_Tiles_Upscaled_4x.png-56f48860fb6f246ce4f2e1b58f5317bb.ctex"]
 
 [params]
 

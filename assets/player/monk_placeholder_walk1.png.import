@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uusoq5qtmbl6"
-path.s3tc="res://.godot/imported/groundWIP.png-17d17a0c412a6f7137dbdf199e4f00b2.s3tc.ctex"
+uid="uid://o8dfq3y85fkm"
+path.s3tc="res://.godot/imported/monk_placeholder_walk1.png-92427f3cf39619b89fb60a1bf956f451.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/groundWIP.png"
-dest_files=["res://.godot/imported/groundWIP.png-17d17a0c412a6f7137dbdf199e4f00b2.s3tc.ctex"]
+source_file="res://assets/player/monk_placeholder_walk1.png"
+dest_files=["res://.godot/imported/monk_placeholder_walk1.png-92427f3cf39619b89fb60a1bf956f451.s3tc.ctex"]
 
 [params]
 

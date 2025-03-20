@@ -1,21 +1,25 @@
 [gd_scene load_steps=12 format=4 uid="uid://cqe5r4xg5qak5"]
 
-[ext_resource type="Texture2D" uid="uid://spff2xjmeek6" path="res://assets/Test_Ground_Tiles_Upscaled_2x.png" id="1_myadn"]
-[ext_resource type="Texture2D" uid="uid://cb3piua4g2gew" path="res://assets/Test_House_Tiles_Upscaled_2x.png" id="2_l6ovo"]
-[ext_resource type="Texture2D" uid="uid://b8oja6ewolukm" path="res://assets/Test_Ground_Tiles_Upscaled_4x.png" id="3_hwsv3"]
-[ext_resource type="Texture2D" uid="uid://f5dwar8pkux" path="res://assets/Test_House_Tiles_Upscaled_4x.png" id="4_uxr3k"]
-[ext_resource type="PackedScene" uid="uid://bdj2whxfblwj" path="res://player2d.tscn" id="5_uxr3k"]
-[ext_resource type="Script" uid="uid://v3uiiq5qbk1v" path="res://player_2d.gd" id="6_me3g3"]
+[ext_resource type="Texture2D" uid="uid://b8oja6ewolukm" path="res://assets/environment/Test_Ground_Tiles_Upscaled_4x.png" id="1_3pqdy"]
+[ext_resource type="Texture2D" uid="uid://f5dwar8pkux" path="res://assets/structures/Test_House_Tiles_Upscaled_4x.png" id="2_x848e"]
+[ext_resource type="PackedScene" uid="uid://bdj2whxfblwj" path="res://scenes/player/player2d.tscn" id="3_c81vs"]
+[ext_resource type="Script" uid="uid://v3uiiq5qbk1v" path="res://scripts/player/player_2d.gd" id="4_hxrme"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_u27mn"]
+load_path = "res://.godot/imported/Test_Ground_Tiles_Upscaled_2x.png-5df2f48e7d23adc513a9f49f712757c3.ctex"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ocok"]
-texture = ExtResource("1_myadn")
+texture = SubResource("CompressedTexture2D_u27mn")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n18vk"]
+load_path = "res://.godot/imported/Test_House_Tiles_Upscaled_2x.png-7f20ef81696626c522e05ae02a34f3d3.ctex"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc8sd"]
-texture = ExtResource("2_l6ovo")
+texture = SubResource("CompressedTexture2D_n18vk")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0
@@ -61,7 +65,7 @@ texture_region_size = Vector2i(64, 64)
 6:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_me3g3"]
-texture = ExtResource("3_hwsv3")
+texture = ExtResource("1_3pqdy")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 1:0/0 = 0
@@ -70,7 +74,7 @@ texture_region_size = Vector2i(128, 128)
 2:0/0/custom_data_0 = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rpab8"]
-texture = ExtResource("4_uxr3k")
+texture = ExtResource("2_x848e")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 1:0/0 = 0
@@ -136,10 +140,10 @@ tile_set = SubResource("TileSet_l6ovo")
 tile_map_data = PackedByteArray("AAD8//v/AwAEAAEAAAD8//z/AwAFAAIAAAD9//v/AwAFAAEAAAD9//z/AwAGAAIAAAD+//v/AwAGAAEAAAD+//z/AwAAAAMAAAD///v/AwAAAAIAAAD///z/AwABAAMAAAAAAPv/AwABAAIAAAAAAPz/AwABAAMAAAABAPv/AwACAAIAAAABAPz/AwACAAMAAAACAPv/AwADAAIAAAACAPz/AwADAAMAAAADAPv/AwAEAAIAAAADAPz/AwAEAAMAAAD8//3/AwAFAAMAAAD8//7/AwAGAAQAAAD9//3/AwAGAAMAAAD9//7/AwAAAAUAAAD+//3/AwAAAAQAAAD+//7/AwABAAUAAAD///3/AwABAAQAAAD///7/AwACAAUAAAAAAP3/AwACAAQAAAAAAP7/AwADAAUAAAABAP3/AwADAAQAAAABAP7/AwAEAAUAAAACAP3/AwAEAAQAAAACAP7/AwAFAAUAAAADAP3/AwAFAAQAAAADAP7/AwAGAAUAAAAAAPr/AwABAAEAAAABAPr/AwABAAEAAAACAPr/AwACAAEAAAADAPr/AwADAAEAAAD8//r/AwAGAAAAAAD///r/AwABAAEAAAD+//r/AwABAAEAAAD9//r/AwAAAAEAAAD9//n/AwAAAAAAAAACAPn/AwAFAAAAAAD+//n/AwABAAAAAAD///n/AwACAAAAAAAAAPn/AwADAAAAAAABAPn/AwAEAAAAAAA=")
 tile_set = SubResource("TileSet_l6ovo")
 
-[node name="Player" parent="." instance=ExtResource("5_uxr3k")]
+[node name="Player" parent="." instance=ExtResource("3_c81vs")]
 position = Vector2(-66, 564)
 scale = Vector2(2, 2)
-script = ExtResource("6_me3g3")
+script = ExtResource("4_hxrme")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(33, -57.5)

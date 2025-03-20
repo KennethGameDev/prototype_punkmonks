@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bdj2whxfblwj"]
 
-[ext_resource type="Texture2D" uid="uid://4c0u53igto0o" path="res://assets/WIPpunkmonk.png" id="1_pejtf"]
+[ext_resource type="Texture2D" uid="uid://4c0u53igto0o" path="res://assets/player/WIPpunkmonk.png" id="1_pejtf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pejtf"]
 animations = [{
