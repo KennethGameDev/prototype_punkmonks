@@ -17,8 +17,9 @@ tile_set = ExtResource("1_msiu8")
 tile_map_data = PackedByteArray("AAAFAPL/BAAAAAAAAQA=")
 tile_set = ExtResource("1_msiu8")
 
-[node name="Player" parent="." instance=ExtResource("2_ypjy2")]
+[node name="Player" parent="." node_paths=PackedStringArray("navigation_layer") instance=ExtResource("2_ypjy2")]
 position = Vector2(-101, 88)
+navigation_layer = NodePath("../GrassLayer")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(101, -88)

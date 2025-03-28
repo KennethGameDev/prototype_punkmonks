@@ -6,18 +6,7 @@ static var direction: Vector2
 # Neither: -1
 static var primary_movement_axis: int = -1
 
-static func movement_input() -> Vector2:
-	#if Input.is_action_pressed("move_left"):
-		#direction = Vector2.LEFT
-	#elif Input.is_action_pressed("move_right"):
-		#direction = Vector2.RIGHT
-	#elif Input.is_action_pressed("move_forward"):
-		#direction = Vector2.UP
-	#elif Input.is_action_pressed("move_back"):
-		#direction = Vector2.DOWN
-	#else:
-		#direction = Vector2.ZERO
-	
+static func movement_input() -> Vector2:	
 	# Get input direction (includes diagonal movement)
 	direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	
@@ -40,31 +29,39 @@ static func movement_input() -> Vector2:
 		primary_movement_axis = -1
 		direction = Vector2.ZERO
 	
-	## If the primary axis is currently horizontal,
-	## check for simultaneous movement on the vertical axis
-	#if primary_movement_axis == 0:
-		#if Input.is_action_pressed("move_forward"):
-			#direction.y = -1.0
-			#direction.x = 0
-		#elif Input.is_action_pressed("move_back"):
-			#direction.y = 1.0
-			#direction.x = 0
-		## Check if the player releases the input for the primary axis
-		#if Input.is_action_just_released("move_right") || Input.is_action_just_released("move_left"):
-			#primary_movement_axis = 1
+	# If the primary axis is currently horizontal,
+	# check for simultaneous movement on the vertical axis
+	if primary_movement_axis == 0:
+		if Input.is_action_pressed("move_forward"):
+			direction.y = -1.0
+			direction.x = 0
+			# Check if the player releases the input for the primary axis
+			if Input.is_action_just_released("move_right") || Input.is_action_just_released("move_left"):
+				primary_movement_axis = 1
+		elif Input.is_action_pressed("move_back"):
+			direction.y = 1.0
+			direction.x = 0
+			# Check if the player releases the input for the primary axis
+			if Input.is_action_just_released("move_right") || Input.is_action_just_released("move_left"):
+				primary_movement_axis = 1
 	
-	#if primary_movement_axis == 1:
-		#if Input.is_action_pressed("move_right"):
-			#primary_movement_axis = 0
-			#direction.x = 1.0
-			#direction.y = 0
-		#elif Input.is_action_pressed("move_left"):
-			#primary_movement_axis = 0
-			#direction.x = -1.0
-			#direction.y = 0
+	# If the primary axis is currently vertical,
+	# check for simultaneous movement on the horizontal axis
+	if primary_movement_axis == 1:
+		if Input.is_action_pressed("move_right"):
+			direction.x = 1.0
+			direction.y = 0
+			# Check if the player releases the input for the primary axis
+			if Input.is_action_just_released("move_forward") || Input.is_action_just_released("move_back"):
+				primary_movement_axis = 0
+		elif Input.is_action_pressed("move_left"):
+			direction.x = -1.0
+			direction.y = 0
+			# Check if the player releases the input for the primary axis
+			if Input.is_action_just_released("move_forward") || Input.is_action_just_released("move_back"):
+				primary_movement_axis = 0
 	
 	direction = direction.normalized()
-	prints(direction)
 	
 	return direction
 
@@ -86,17 +83,15 @@ static func check_simulatneous_movement() -> String:
 	return result
 
 
-#static func get_primary_movement_axis() -> int:
-	#var result: int
-	#
-	#if direction != Vector2.ZERO:
-		#if direction == Vector2.UP || direction == Vector2.DOWN:
-			#result = 1
-		#elif direction == Vector2.LEFT || direction == Vector2.RIGHT:
-			#result = 0
-		#else:
-			#result = -1
-	#else:
-		#result = -1
-	#
-	#return result
+static func get_primary_movement_axis() -> String:
+	var result: String
+	
+	match primary_movement_axis:
+		0:
+			result = "Horizontal"
+		1:
+			result = "Vertical"
+		_:
+			result = "Error: No axis found"
+	
+	return result
