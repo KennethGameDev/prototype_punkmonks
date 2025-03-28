@@ -9,7 +9,7 @@ func _on_process(_delta : float) -> void:
 
 
 func _on_physics_process(_delta : float) -> void:
-	var direction: Vector2 = GameInputEvents.movement_input()
+	var direction: Vector2 = GameInputEvents.get_movement_direction()
 	
 	if direction == Vector2.UP:
 		animated_sprite_2d.play("walk_back")
@@ -45,22 +45,21 @@ func move(direction: Vector2):
 	
 	# Get the tile the player is trying to move to (Vector2i)
 	var target_tile: Vector2i
+	var target_tile_location: Vector2
 		
 	match direction:
 		Vector2.UP:
 			target_tile = player.navigation_layer.get_neighbor_cell(current_tile, TileSet.CELL_NEIGHBOR_TOP_SIDE)
+			target_tile_location = player.navigation_layer.map_to_local(target_tile)
+			player.position.move_toward(target_tile_location, speed)
 		Vector2.DOWN:
 			target_tile = player.navigation_layer.get_neighbor_cell(current_tile, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE)
 		Vector2.RIGHT:
 			target_tile = player.navigation_layer.get_neighbor_cell(current_tile, TileSet.CELL_NEIGHBOR_RIGHT_SIDE)
 		Vector2.LEFT:
 			target_tile = player.navigation_layer.get_neighbor_cell(current_tile, TileSet.CELL_NEIGHBOR_LEFT_SIDE)
-	#var target_tile: Vector2i = Vector2i(
-		#current_tile.x + direction.x,
-		#current_tile.y + direction.y
-	#)
 	prints(current_tile, target_tile)
 	
-	player.velocity = direction * speed
-	player.move_and_slide()
+	#player.velocity = direction * speed
+	#player.move_and_slide()
 	

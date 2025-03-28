@@ -1,12 +1,12 @@
 class_name GameInputEvents
 
 static var direction: Vector2
+# No Moving: -1
 # Horizontal Movement: 0
 # Vertical Movement: 1
-# Neither: -1
 static var primary_movement_axis: int = -1
 
-static func movement_input() -> Vector2:	
+static func get_movement_direction() -> Vector2:	
 	# Get input direction (includes diagonal movement)
 	direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	
@@ -92,6 +92,6 @@ static func get_primary_movement_axis() -> String:
 		1:
 			result = "Vertical"
 		_:
-			result = "Error: No axis found"
+			result = "Not Moving"
 	
 	return result
