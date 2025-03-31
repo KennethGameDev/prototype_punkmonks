@@ -1,13 +1,17 @@
-[gd_scene load_steps=19 format=3 uid="uid://bpaji1sbrdiu3"]
+[gd_scene load_steps=21 format=3 uid="uid://bpaji1sbrdiu3"]
 
 [ext_resource type="Texture2D" uid="uid://bpjbe8dtw4dxg" path="res://assets/player/WIPpunkmonk-Sheet-test-walk-forward.png" id="1_eru6m"]
 [ext_resource type="Script" uid="uid://c6lg0vq8ydo22" path="res://scripts/player/player.gd" id="1_iuw3c"]
 [ext_resource type="Script" uid="uid://ckcecbibcmn4x" path="res://scripts/state_machine/node_state_machine.gd" id="2_m2p1x"]
+[ext_resource type="Script" uid="uid://b16km41405wv3" path="res://scenes/test/player/obstruction_checker.gd" id="2_u6xu0"]
 [ext_resource type="Script" uid="uid://ktch4hc364ff" path="res://scripts/player/states/idle_state.gd" id="3_2lxat"]
 [ext_resource type="Script" uid="uid://d35xfmmcknelq" path="res://scripts/player/states/walk_state.gd" id="4_2lxat"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iuw3c"]
 radius = 52.5095
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm3lm"]
+size = Vector2(126, 126)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s02kp"]
 atlas = ExtResource("1_eru6m")
@@ -133,14 +137,22 @@ animations = [{
 collision_layer = 2
 script = ExtResource("1_iuw3c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerCollider" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -52)
 shape = SubResource("CircleShape2D_iuw3c")
+disabled = true
+
+[node name="ObstructionChecker" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("2_u6xu0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObstructionChecker"]
+shape = SubResource("RectangleShape2D_nm3lm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, -129)
+position = Vector2(-1, -65)
 sprite_frames = SubResource("SpriteFrames_x7p2l")
-animation = &"walk_back"
+animation = &"idle_front"
 autoplay = "idle_front"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
@@ -156,3 +168,5 @@ animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 script = ExtResource("4_2lxat")
 player = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+
+[connection signal="body_entered" from="ObstructionChecker" to="ObstructionChecker" method="_on_body_entered"]
