@@ -23,3 +23,4 @@ navigation_layer = NodePath("../GrassLayer")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(101, -88)
+zoom = Vector2(0.7, 0.7)

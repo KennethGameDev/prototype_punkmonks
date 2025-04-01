@@ -2,7 +2,7 @@ extends NodeState
 
 @export var player: Player
 @export var animated_sprite_2d: AnimatedSprite2D
-@export var speed: int = 500
+@export var speed: int = 400
 @onready var obstruction_checker: ObstructionDetector = $"../../ObstructionChecker"
 
 # Movement variables:

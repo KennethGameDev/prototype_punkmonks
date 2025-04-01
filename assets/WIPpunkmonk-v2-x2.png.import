@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpjbe8dtw4dxg"
-path="res://.godot/imported/WIPpunkmonk-Sheet-test-walk-forward.png-1c275a1d470827c7f79abc1ca2dd918a.ctex"
+uid="uid://dfpw5o6kq6iqe"
+path="res://.godot/imported/WIPpunkmonk-v2-x2.png-516bba969b857443c5c0f7ed9cf6fefd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/WIPpunkmonk-Sheet-test-walk-forward.png"
-dest_files=["res://.godot/imported/WIPpunkmonk-Sheet-test-walk-forward.png-1c275a1d470827c7f79abc1ca2dd918a.ctex"]
+source_file="res://assets/WIPpunkmonk-v2-x2.png"
+dest_files=["res://.godot/imported/WIPpunkmonk-v2-x2.png-516bba969b857443c5c0f7ed9cf6fefd.ctex"]
 
 [params]
 
