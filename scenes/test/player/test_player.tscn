@@ -1,17 +1,14 @@
-[gd_scene load_steps=20 format=3 uid="uid://bpaji1sbrdiu3"]
+[gd_scene load_steps=17 format=3 uid="uid://bpaji1sbrdiu3"]
 
 [ext_resource type="Script" uid="uid://c6lg0vq8ydo22" path="res://scripts/player/player.gd" id="1_iuw3c"]
-[ext_resource type="Script" uid="uid://ckcecbibcmn4x" path="res://scripts/state_machine/node_state_machine.gd" id="2_m2p1x"]
-[ext_resource type="Script" uid="uid://b16km41405wv3" path="res://scenes/test/player/obstruction_checker.gd" id="2_u6xu0"]
-[ext_resource type="Script" uid="uid://ktch4hc364ff" path="res://scripts/player/states/idle_state.gd" id="3_2lxat"]
+[ext_resource type="Script" uid="uid://d23mpgtt6pctj" path="res://scenes/test/player/detectors.gd" id="2_5aguw"]
 [ext_resource type="Texture2D" uid="uid://djrgj74ahsvkd" path="res://assets/player/WIPpunkmonk-v2-x2.png" id="3_u6xu0"]
-[ext_resource type="Script" uid="uid://d35xfmmcknelq" path="res://scripts/player/states/walk_state.gd" id="4_2lxat"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_iuw3c"]
-radius = 52.5095
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4g1ra"]
+size = Vector2(127.5, 127.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm3lm"]
-size = Vector2(126, 126)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjbbp"]
+size = Vector2(127, 127)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4g1ra"]
 atlas = ExtResource("3_u6xu0")
@@ -131,35 +128,64 @@ collision_layer = 2
 script = ExtResource("1_iuw3c")
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -52)
-shape = SubResource("CircleShape2D_iuw3c")
-disabled = true
+shape = SubResource("RectangleShape2D_4g1ra")
 
-[node name="ObstructionChecker" type="Area2D" parent="."]
+[node name="Detectors" type="Node2D" parent="."]
+script = ExtResource("2_5aguw")
+
+[node name="NorthCollision" type="Area2D" parent="Detectors"]
 collision_layer = 0
-script = ExtResource("2_u6xu0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ObstructionChecker"]
-shape = SubResource("RectangleShape2D_nm3lm")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/NorthCollision"]
+position = Vector2(0, -128)
+shape = SubResource("RectangleShape2D_bjbbp")
+debug_color = Color(0.85, 0.7072, 0.136, 0.215686)
+
+[node name="SouthCollision" type="Area2D" parent="Detectors"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/SouthCollision"]
+position = Vector2(0, 128)
+shape = SubResource("RectangleShape2D_bjbbp")
+debug_color = Color(0.85, 0.7072, 0.136, 0.215686)
+
+[node name="EastCollision" type="Area2D" parent="Detectors"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/EastCollision"]
+position = Vector2(128, 0)
+shape = SubResource("RectangleShape2D_bjbbp")
+debug_color = Color(0.85, 0.7072, 0.136, 0.215686)
+
+[node name="WestCollision" type="Area2D" parent="Detectors"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/WestCollision"]
+position = Vector2(-128, 0)
+shape = SubResource("RectangleShape2D_bjbbp")
+debug_color = Color(0.85, 0.7072, 0.136, 0.215686)
+
+[node name="Interaction" type="Area2D" parent="Detectors"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/Interaction"]
+position = Vector2(0, 128)
+shape = SubResource("RectangleShape2D_bjbbp")
+debug_color = Color(0.99, 0.396, 0.7326, 0.545098)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1, -65)
+position = Vector2(-1, -33)
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_x7p2l")
-animation = &"idle_back"
+animation = &"idle_front"
 autoplay = "idle_front"
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
-script = ExtResource("2_m2p1x")
-initial_node_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animated_sprite_2d")]
-script = ExtResource("3_2lxat")
-player = NodePath("../..")
-animated_sprite_2d = NodePath("../../AnimatedSprite2D")
-
-[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animated_sprite_2d")]
-script = ExtResource("4_2lxat")
-player = NodePath("../..")
-animated_sprite_2d = NodePath("../../AnimatedSprite2D")
-
-[connection signal="body_entered" from="ObstructionChecker" to="ObstructionChecker" method="_on_body_entered"]
+[connection signal="body_entered" from="Detectors/NorthCollision" to="Detectors" method="_on_north_collision_body_entered"]
+[connection signal="body_exited" from="Detectors/NorthCollision" to="Detectors" method="_on_north_collision_body_exited"]
+[connection signal="body_entered" from="Detectors/SouthCollision" to="Detectors" method="_on_south_collision_body_entered"]
+[connection signal="body_exited" from="Detectors/SouthCollision" to="Detectors" method="_on_south_collision_body_exited"]
+[connection signal="body_entered" from="Detectors/EastCollision" to="Detectors" method="_on_east_collision_body_entered"]
+[connection signal="body_exited" from="Detectors/EastCollision" to="Detectors" method="_on_east_collision_body_exited"]
+[connection signal="body_entered" from="Detectors/WestCollision" to="Detectors" method="_on_west_collision_body_entered"]
+[connection signal="body_exited" from="Detectors/WestCollision" to="Detectors" method="_on_west_collision_body_exited"]
+[connection signal="body_entered" from="Detectors/Interaction" to="Detectors" method="_on_interaction_body_entered"]
+[connection signal="body_exited" from="Detectors/Interaction" to="Detectors" method="_on_interaction_body_exited"]

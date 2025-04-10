@@ -23,10 +23,12 @@ func _on_next_transitions() -> void:
 	
 	if GameInputEvents.is_movement_input():
 		transition.emit("Walk")
+		print("Transitioning from Idle to Walking...")
 
 
 func _on_enter() -> void:
-	pass
+	print("Transitioned from Walking to Idle.")
+	#pass
 
 
 func _on_exit() -> void:

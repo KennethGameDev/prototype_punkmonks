@@ -12,7 +12,8 @@ static var direction: Vector2
 # Vertical Movement: 1
 static var primary_movement_axis: int = -1
 
-static func get_movement_direction() -> Vector2:	
+
+static func get_movement_input() -> Vector2:	
 	## Get input direction (includes diagonal movement)
 	direction = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 	
@@ -86,13 +87,11 @@ static func get_movement_direction() -> Vector2:
 	
 	return direction
 
-
 static func is_movement_input() -> bool:
 	if direction == Vector2.ZERO:
 		return false
 	else:
 		return true
-
 
 static func get_primary_movement_axis() -> String:
 	var result: String

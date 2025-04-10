@@ -14,13 +14,13 @@ tile_map_data = PackedByteArray("AAAAAAIAAQACAAIAAAAAAAEAAQACAAEAAAAAAAAAAQACAAE
 tile_set = ExtResource("1_msiu8")
 
 [node name="Houses" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAFAPL/BAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAAJAAEABAAAAAAAAQA=")
 tile_set = ExtResource("1_msiu8")
 
 [node name="Player" parent="." node_paths=PackedStringArray("navigation_layer") instance=ExtResource("2_ypjy2")]
-position = Vector2(-64, 320)
+position = Vector2(0, 320)
 navigation_layer = NodePath("../GrassLayer")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(101, -88)
+position = Vector2(0, -192)
 zoom = Vector2(0.7, 0.7)
