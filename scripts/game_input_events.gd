@@ -105,3 +105,19 @@ static func get_primary_movement_axis() -> String:
 			result = "Not Moving"
 	
 	return result
+
+static var elapsed_time: float = 0
+static var previous_input_name: String = ""
+static func is_input_held(input_name: String, seconds_to_hold: float, delta: float) -> bool:
+	if previous_input_name != input_name:
+		elapsed_time = 0
+	if input_name != "":
+		previous_input_name = input_name
+		if Input.is_action_pressed(input_name):
+			elapsed_time += delta
+		else:
+			elapsed_time = 0
+		if elapsed_time >= seconds_to_hold:
+			elapsed_time = 0
+			return true
+	return false

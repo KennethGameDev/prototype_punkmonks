@@ -30,7 +30,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	match states:
 		{"Idle": true, ..}:
-			idle_state()
+			idle_state(delta)
 		{"Move": true, ..}:
 			move_state()
 		{"Interaction": true, ..}:
@@ -55,11 +55,44 @@ func transition_to_state(new_state: String) -> void:
 		push_error("Failed transitioning to", new_state, "state unchanged.")
 
 
-func idle_state() -> void:
-	if GameInputEvents.get_movement_input() == Vector2.ZERO:
-		play_idle_anim()
-	else:
+var input_name: String = ""
+func idle_state(delta: float) -> void:
+	## Update the direction
+	direction = GameInputEvents.get_movement_input()
+	# For any direction:
+	# update the idle_direction, and update input_name
+	match direction:
+		Vector2.UP:
+			idle_direction = direction
+			input_name = "move_forward"
+		Vector2.DOWN:
+			idle_direction = direction
+			input_name = "move_back"
+		Vector2.LEFT:
+			idle_direction = direction
+			input_name = "move_left"
+		Vector2.RIGHT:
+			idle_direction = direction
+			input_name = "move_right"
+	# play the idle animation
+	play_idle_anim()
+	
+	## Transition to walking if the input is held for 0.15 seconds
+	if GameInputEvents.is_input_held(input_name, 0.15, delta):
 		transition_to_state("Move")
+
+
+func play_idle_anim() -> void:
+	## Determine the idle animation to play
+	match idle_direction:
+		Vector2.UP:
+			animated_sprite_2d.play("idle_back")
+		Vector2.DOWN:
+			animated_sprite_2d.play("idle_front")
+		Vector2.LEFT:
+			animated_sprite_2d.play("idle_left")
+		Vector2.RIGHT:
+			animated_sprite_2d.play("idle_right")
 
 
 func move_state() -> void:
@@ -95,18 +128,6 @@ func move_state() -> void:
 		else:
 			# play an error sound
 			pass
-
-func play_idle_anim() -> void:
-	## Determine the idle animation to play
-	match idle_direction:
-		Vector2.UP:
-			animated_sprite_2d.play("idle_back")
-		Vector2.DOWN:
-			animated_sprite_2d.play("idle_front")
-		Vector2.LEFT:
-			animated_sprite_2d.play("idle_left")
-		Vector2.RIGHT:
-			animated_sprite_2d.play("idle_right")
 
 
 func play_movement_anim() -> void:
