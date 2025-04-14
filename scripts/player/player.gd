@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var collision_detectors: Detectors = $Detectors
 
 # Dictionary containing all the player's "states"
-@onready var states = {"Idle": true, "Move": false, "Interaction": false}
+@onready var states = {"Idle": true, "Move": false}
 
 
 # Movement variables:
@@ -33,8 +33,6 @@ func _physics_process(delta: float) -> void:
 			idle_state(delta)
 		{"Move": true, ..}:
 			move_state()
-		{"Interaction": true, ..}:
-			pass
 
 
 func transition_to_state(new_state: String) -> void:
@@ -76,6 +74,8 @@ func idle_state(delta: float) -> void:
 			input_name = "move_right"
 	# play the idle animation
 	play_idle_anim()
+	## Move the interaction detector to the correct side
+	set_interaction_detector_position(idle_direction)
 	
 	## Transition to walking if the input is held for 0.15 seconds
 	if GameInputEvents.is_input_held(input_name, 0.15, delta):
@@ -117,6 +117,8 @@ func move_state() -> void:
 				obstruction_detected = true
 			## Play the appropriate walking
 			play_movement_anim()
+			## Move the interaction detector to the correct side
+			set_interaction_detector_position(idle_direction)
 		else:
 			## Switch to the idle state
 			transition_to_state("Idle")
@@ -192,3 +194,17 @@ func move() -> void:
 			# and allow movement again
 			if moving_towards_target:
 				moving_towards_target = false
+
+
+## Set the Interaction Detector's relative position given the player's direction
+func set_interaction_detector_position(direction: Vector2) -> void:
+	var interact_detector: Area2D = collision_detectors.allDetectors[4]
+	match direction:
+		Vector2.UP:
+			interact_detector.position = Vector2(0, -128)
+		Vector2.DOWN:
+			interact_detector.position = Vector2(0, 128)
+		Vector2.LEFT:
+			interact_detector.position = Vector2(-128, 0)
+		Vector2.RIGHT:
+			interact_detector.position = Vector2(128, 0)
