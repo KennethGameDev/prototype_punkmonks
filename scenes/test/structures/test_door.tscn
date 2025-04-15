@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b8qepbsty14ex" path="res://scenes/test/structures/test_door.gd" id="1_i475t"]
 [ext_resource type="Texture2D" uid="uid://dxmmecqjfwtxs" path="res://assets/structures/TestDoor-Sheet-2x.png" id="1_rph68"]
-[ext_resource type="PackedScene" uid="uid://bd2k2qq2y320e" path="res://scenes/components/interactable_component.tscn" id="3_r5f33"]
+[ext_resource type="PackedScene" uid="uid://bd2k2qq2y320e" path="res://scenes/components/auto_interactable_component.tscn" id="3_r5f33"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rmn0k"]
 atlas = ExtResource("1_rph68")
@@ -102,9 +102,9 @@ autoplay = "default"
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_gsgva")
 
-[node name="InteractableComponent" parent="." instance=ExtResource("3_r5f33")]
+[node name="AutoInteractableComponent" parent="." instance=ExtResource("3_r5f33")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutoInteractableComponent"]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_1ll8j")
 debug_color = Color(0.248101, 0.629003, 0.270915, 0.42)

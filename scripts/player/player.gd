@@ -27,6 +27,10 @@ func _ready() -> void:
 	position = navigation_layer.map_to_local(current_tile)
 
 
+func _process(delta: float) -> void:
+	GameInputEvents.get_interaction_input()
+
+
 func _physics_process(delta: float) -> void:
 	match states:
 		{"Idle": true, ..}:

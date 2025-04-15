@@ -106,6 +106,12 @@ static func get_primary_movement_axis() -> String:
 	
 	return result
 
+
+static func get_interaction_input() -> void:
+	if Input.is_action_just_pressed("interact"):
+		print("Interact attempt")
+
+
 static var elapsed_time: float = 0
 static var previous_input_name: String = ""
 static func is_input_held(input_name: String, seconds_to_hold: float, delta: float) -> bool:
