@@ -1,4 +1,3 @@
-class_name Player
 extends CharacterBody2D
 
 @export var navigation_layer: TileMapLayer
@@ -7,7 +6,7 @@ extends CharacterBody2D
 @onready var collision_detectors: Detectors = $Detectors
 
 # Dictionary containing all the player's "states"
-@onready var states = {"Idle": true, "Move": false}
+@onready var states = {"idle": true, "move": false, "talking": false}
 
 
 # Movement variables:
@@ -27,16 +26,14 @@ func _ready() -> void:
 	position = navigation_layer.map_to_local(current_tile)
 
 
-func _process(delta: float) -> void:
-	GameInputEvents.get_interaction_input()
-
-
 func _physics_process(delta: float) -> void:
 	match states:
-		{"Idle": true, ..}:
+		{"idle": true, ..}:
 			idle_state(delta)
-		{"Move": true, ..}:
+		{"move": true, ..}:
 			move_state()
+		{"talking": true, ..}:
+			talk_state()
 
 
 func transition_to_state(new_state: String) -> void:
@@ -45,8 +42,6 @@ func transition_to_state(new_state: String) -> void:
 		if key == new_state:
 			valid_state = true
 			break
-		else:
-			valid_state = false
 	if valid_state:
 		for state in states:
 			if state == new_state:
@@ -55,6 +50,11 @@ func transition_to_state(new_state: String) -> void:
 				states[state] = false
 	else:
 		push_error("Failed transitioning to", new_state, "state unchanged.")
+
+
+func talk_state() -> void:
+	print("Works so far, but needs a check for an interactable.")
+	transition_to_state("idle")
 
 
 var input_name: String = ""
@@ -80,10 +80,16 @@ func idle_state(delta: float) -> void:
 	play_idle_anim()
 	## Move the interaction detector to the correct side
 	set_interaction_detector_position(idle_direction)
+	## Check for an interaction from the player
+	if Input.is_action_just_pressed("interact"):
+		print(collision_detectors.get_detector(4).get_collision_mask())
+		if collision_detectors.interaction_detected == true:
+			#get_interactable_type()
+			pass
 	
 	## Transition to walking if the input is held for 0.15 seconds
 	if GameInputEvents.is_input_held(input_name, 0.15, delta):
-		transition_to_state("Move")
+		transition_to_state("move")
 
 
 func play_idle_anim() -> void:
@@ -125,15 +131,14 @@ func move_state() -> void:
 			set_interaction_detector_position(idle_direction)
 		else:
 			## Switch to the idle state
-			transition_to_state("Idle")
+			transition_to_state("idle")
 	
-	if states.get("Move") == true:
-		# Attempt movement
-		if !obstruction_detected:
-			move()
-		else:
-			# play an error sound
-			pass
+	# Attempt movement
+	if !obstruction_detected:
+		move()
+	else:
+		# play an error sound
+		pass
 
 
 func play_movement_anim() -> void:
@@ -201,9 +206,9 @@ func move() -> void:
 
 
 ## Set the Interaction Detector's relative position given the player's direction
-func set_interaction_detector_position(direction: Vector2) -> void:
-	var interact_detector: Area2D = collision_detectors.allDetectors[4]
-	match direction:
+func set_interaction_detector_position(interact_direction: Vector2) -> void:
+	var interact_detector: Area2D = collision_detectors.get_detector(4)
+	match interact_direction:
 		Vector2.UP:
 			interact_detector.position = Vector2(0, -128)
 		Vector2.DOWN:
@@ -212,3 +217,6 @@ func set_interaction_detector_position(direction: Vector2) -> void:
 			interact_detector.position = Vector2(-128, 0)
 		Vector2.RIGHT:
 			interact_detector.position = Vector2(128, 0)
+
+
+#func get_interactable_type() -> 

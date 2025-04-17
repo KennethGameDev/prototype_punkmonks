@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://cqe5r4xg5qak5"]
+[gd_scene load_steps=4 format=4 uid="uid://cqe5r4xg5qak5"]
 
 [ext_resource type="TileSet" uid="uid://b4vuejabso84x" path="res://tilesets/game_tile_set.tres" id="1_msiu8"]
 [ext_resource type="PackedScene" uid="uid://bpaji1sbrdiu3" path="res://scenes/test/player/test_player.tscn" id="2_ypjy2"]
+[ext_resource type="PackedScene" uid="uid://r5kuhgm46q28" path="res://scenes/test/npc/test_npc.tscn" id="3_ypjy2"]
 
 [node name="Main" type="Node"]
 
@@ -22,5 +23,10 @@ position = Vector2(0, 320)
 navigation_layer = NodePath("../GrassLayer")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -192)
+offset = Vector2(0, -192)
 zoom = Vector2(0.7, 0.7)
+
+[node name="NPC" parent="." node_paths=PackedStringArray("navigation_layer") instance=ExtResource("3_ypjy2")]
+position = Vector2(-128, -64)
+navigation_layer = NodePath("../GrassLayer")
+starting_direction = "up"
