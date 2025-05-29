@@ -95,6 +95,8 @@ pause={
 2d_physics/layer_3="Auto-Interactable"
 2d_physics/layer_4="Manual-Interactable"
 2d_physics/layer_5="NPC"
+2d_physics/layer_9="Arena Floor"
+2d_physics/layer_10="Fighter"
 
 [physics]
 
