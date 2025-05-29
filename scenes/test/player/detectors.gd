@@ -52,7 +52,7 @@ func is_valid_direction(direction: Vector2) -> bool:
 
 
 func get_interactable() -> Node2D:
-	interactable.get_node()
+	#interactable.get_node()
 	return interactable
 
 

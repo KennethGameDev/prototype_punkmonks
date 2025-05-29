@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dbhjqd412pia7"]
+
+[node name="TestFight" type="Node2D"]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Platform" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Foreground" type="CanvasLayer" parent="."]

@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-instance uniform vec4 overlay_color_test = vec4(0, 0, 0, 1);
+uniform vec4 overlay_color_test = vec4(0, 0, 0, 1);
 
 void vertex() {
 	// Called for every vertex the material is visible on.

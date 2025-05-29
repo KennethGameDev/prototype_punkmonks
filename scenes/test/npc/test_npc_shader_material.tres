@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bpojr6gw4jaum"]
+
+[ext_resource type="Shader" uid="uid://dm61er4ww4lh4" path="res://scenes/test/npc/test_npc_shader.gdshader" id="1_i5ykl"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "test_shader_mat"
+shader = ExtResource("1_i5ykl")
+shader_parameter/overlay_color_test = Vector4(0, 0, 0, 1)

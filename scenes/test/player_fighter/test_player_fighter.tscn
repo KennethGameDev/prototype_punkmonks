@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi5htmrdy4c6k"]
+
+[ext_resource type="SpriteFrames" uid="uid://cyrqqsomkv4oi" path="res://assets/player_fighter/player_fighter_sprite_frames.tres" id="1_i0u3f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i21wp"]
+radius = 7.0
+height = 32.0
+
+[node name="HumanFighter" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_i0u3f")
+animation = &"walking"
+autoplay = "idle"
+frame_progress = 0.521558
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(4, 0)
+scale = Vector2(4, 4)
+shape = SubResource("CapsuleShape2D_i21wp")

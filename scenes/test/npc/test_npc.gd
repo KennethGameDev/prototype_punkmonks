@@ -3,12 +3,23 @@ extends CharacterBody2D
 
 @export var navigation_layer: TileMapLayer
 @export var speed: int = 450
+@export var overlay_color: Vector4 = Vector4()
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_detectors: Detectors = $Detectors
 
 # the direction the npc will face on load
 @export_enum("up", "down", "left", "right") var starting_direction: String
 var current_tile: Vector2i # the tile the npc is currently on
+
+
+func _init() -> void:
+	# Set the shader color
+	var shader_mat: ShaderMaterial = animated_sprite_2d.get_material()
+	prints("Shader Material Name:", shader_mat)
+	prints("overlay_color_test: ", shader_mat.get_shader_parameter("overlay_color_test"))
+	shader_mat.set_shader_parameter("overlay_color_test", overlay_color)
+	prints("overlay_color_test: ", shader_mat.get_shader_parameter("overlay_color_test"))
+
 
 func _ready() -> void:
 	# Connect to the interaction signal

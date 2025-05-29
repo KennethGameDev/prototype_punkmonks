@@ -1,12 +1,17 @@
 extends CharacterBody2D
 
 @export var navigation_layer: TileMapLayer
-@export var speed: int = 450
+@export var speed: int = 275
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_detectors: Detectors = $Detectors
 
 # Dictionary containing all the player's "states"
 @onready var states = {"idle": true, "move": false, "talking": false}
+
+
+# Animation Variables
+var current_frame: int
+var current_frame_progress: float
 
 
 # Movement variables:
@@ -38,6 +43,7 @@ func _physics_process(delta: float) -> void:
 
 func transition_to_state(new_state: String) -> void:
 	var valid_state: bool = false
+	animated_sprite_2d.stop()
 	for key in states.keys():
 		if key == new_state:
 			valid_state = true
@@ -49,7 +55,7 @@ func transition_to_state(new_state: String) -> void:
 			else:
 				states[state] = false
 	else:
-		push_error("Failed transitioning to", new_state, "state unchanged.")
+		push_error("Failed transitioning to ", new_state, ". State unchanged.")
 
 
 func talk_state() -> void:
@@ -76,8 +82,11 @@ func idle_state(delta: float) -> void:
 		Vector2.RIGHT:
 			idle_direction = direction
 			input_name = "move_right"
+	# Set current_frame and current_frame_progress
+	current_frame = animated_sprite_2d.get_frame()
+	current_frame_progress = animated_sprite_2d.get_frame_progress()
 	# play the idle animation
-	play_idle_anim()
+	play_idle_anim(current_frame, current_frame_progress)
 	## Move the interaction detector to the correct side
 	set_interaction_detector_position(idle_direction)
 	## Check for an interaction from the player
@@ -87,12 +96,12 @@ func idle_state(delta: float) -> void:
 			#get_interactable_type()
 			pass
 	
-	## Transition to walking if the input is held for 0.15 seconds
-	if GameInputEvents.is_input_held(input_name, 0.15, delta):
+	## Transition to walking if the input is held for a short time
+	if GameInputEvents.is_input_held(input_name, 0.125, delta):
 		transition_to_state("move")
 
 
-func play_idle_anim() -> void:
+func play_idle_anim(frame: int, progress: float) -> void:
 	## Determine the idle animation to play
 	match idle_direction:
 		Vector2.UP:
@@ -103,6 +112,8 @@ func play_idle_anim() -> void:
 			animated_sprite_2d.play("idle_left")
 		Vector2.RIGHT:
 			animated_sprite_2d.play("idle_right")
+	# Set the current frame and progress
+	animated_sprite_2d.set_frame_and_progress(frame, progress)
 
 
 func move_state() -> void:
@@ -125,8 +136,6 @@ func move_state() -> void:
 			else:
 				# A "false" result means the tile is obstructed
 				obstruction_detected = true
-			## Play the appropriate walking
-			play_movement_anim()
 			## Move the interaction detector to the correct side
 			set_interaction_detector_position(idle_direction)
 		else:
@@ -137,11 +146,12 @@ func move_state() -> void:
 	if !obstruction_detected:
 		move()
 	else:
-		# play an error sound
-		pass
+		current_frame = animated_sprite_2d.get_frame()
+		current_frame_progress = animated_sprite_2d.get_frame_progress()
+		play_movement_anim(current_frame, current_frame_progress)
 
 
-func play_movement_anim() -> void:
+func play_movement_anim(frame: int, progress: float) -> void:
 	## Determine the walking animation to play
 	match direction:
 		Vector2.UP:
@@ -152,6 +162,8 @@ func play_movement_anim() -> void:
 			animated_sprite_2d.play("walk_left")
 		Vector2.RIGHT:
 			animated_sprite_2d.play("walk_right")
+	# Set the current frame and progress
+	animated_sprite_2d.set_frame_and_progress(frame, progress)
 	
 	if obstruction_detected:
 		# If there's an obstruction, play animation at half-speed
@@ -163,6 +175,13 @@ func play_movement_anim() -> void:
 
 ## Handles movement logic after the direction and animation are determined
 func move() -> void:
+	## Check if the player is holding the "run" button
+	if Input.is_action_pressed("run"):
+		speed = 550
+		animated_sprite_2d.set_speed_scale(2.0)
+	else:
+		speed = 275
+		animated_sprite_2d.set_speed_scale(1.0)
 	# If player is not already moving
 	if !moving_towards_target:
 		# Use gdscrtip's version of a switch statement to find the desired target
@@ -185,6 +204,11 @@ func move() -> void:
 			velocity = direction * speed
 			# Set moving_towards_target to true
 			moving_towards_target = true
+			# Set current_frame and current_frame_progress
+			current_frame = animated_sprite_2d.get_frame()
+			current_frame_progress = animated_sprite_2d.get_frame_progress()
+			# Play the walking animation
+			play_movement_anim(current_frame, current_frame_progress)
 	# If the player is moving,
 	else:
 		# Update the distance

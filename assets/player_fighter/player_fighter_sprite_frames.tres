@@ -1,0 +1,59 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cyrqqsomkv4oi"]
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"block",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"crouch",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"dodge_backward",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"dodge_forward",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"dodge_spot",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"high_kick",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"jab",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"low_kick",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walking",
+"speed": 10.0
+}]
