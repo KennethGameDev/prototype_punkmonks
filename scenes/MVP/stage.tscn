@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://brn2rrfy0bli5"]
+
+[ext_resource type="Texture2D" uid="uid://bst8rhxbniouf" path="res://assets/environment/arenas/AlphaArena.png" id="1_ng6vb"]
+[ext_resource type="PackedScene" uid="uid://ch7owdppqvpft" path="res://scenes/MVP/fighter.tscn" id="2_57klg"]
+
+[node name="Stage" type="Node2D"]
+
+[node name="AlphaArena" type="Sprite2D" parent="."]
+position = Vector2(287, -394)
+texture = ExtResource("1_ng6vb")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -160)
+
+[node name="fighter" parent="." instance=ExtResource("2_57klg")]
+position = Vector2(-193, -39)
+
+[node name="fighter2" parent="." instance=ExtResource("2_57klg")]
+position = Vector2(179, -39)
+scale = Vector2(-1, 1)

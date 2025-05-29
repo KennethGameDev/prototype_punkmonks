@@ -1,8 +1,8 @@
 [gd_resource type="TileSet" load_steps=7 format=3 uid="uid://mun1tkljx6q"]
 
 [ext_resource type="PackedScene" uid="uid://bnlye0n1y3d3q" path="res://scenes/test/structures/test_door.tscn" id="1_c4aqv"]
-[ext_resource type="Texture2D" uid="uid://dnfjh0wcgk1u4" path="res://assets/environment/TestHouse-Sheet-2x.png" id="1_uaqb7"]
-[ext_resource type="Texture2D" uid="uid://cy4yg3j0o3jne" path="res://assets/environment/TestFurniture-Sheet-2x.png" id="2_yxgbh"]
+[ext_resource type="Texture2D" uid="uid://dnfjh0wcgk1u4" path="res://assets/environment/overworld/TestHouse-Sheet-2x.png" id="1_uaqb7"]
+[ext_resource type="Texture2D" uid="uid://cy4yg3j0o3jne" path="res://assets/environment/overworld/TestFurniture-Sheet-2x.png" id="2_yxgbh"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_eeqqe"]
 scenes/1/scene = ExtResource("1_c4aqv")

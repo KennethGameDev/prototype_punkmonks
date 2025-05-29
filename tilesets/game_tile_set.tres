@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=11 format=3 uid="uid://b4vuejabso84x"]
 
-[ext_resource type="Texture2D" uid="uid://d0j6swuleqj75" path="res://assets/environment/Grass-Sheet-4x.png" id="1_tkbyn"]
-[ext_resource type="Texture2D" uid="uid://su328sptp050" path="res://assets/environment/Dirt-Sheet-4x.png" id="2_v1amf"]
+[ext_resource type="Texture2D" uid="uid://d0j6swuleqj75" path="res://assets/environment/overworld/Grass-Sheet-4x.png" id="1_tkbyn"]
+[ext_resource type="Texture2D" uid="uid://su328sptp050" path="res://assets/environment/overworld/Dirt-Sheet-4x.png" id="2_v1amf"]
 [ext_resource type="Texture2D" uid="uid://qjnxxykeamtm" path="res://assets/structures/House1-Sheet-2x.png" id="3_v1amf"]
-[ext_resource type="Texture2D" uid="uid://dnv4sfqf5j780" path="res://assets/environment/Walkability-Sheet.png" id="4_7cqdy"]
+[ext_resource type="Texture2D" uid="uid://dnv4sfqf5j780" path="res://assets/environment/overworld/Walkability-Sheet.png" id="4_7cqdy"]
 [ext_resource type="PackedScene" uid="uid://j2wluyxkyk3e" path="res://scenes/test/structures/test_large_house.tscn" id="5_pudl8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3pqdy"]

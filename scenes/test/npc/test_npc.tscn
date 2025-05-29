@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dl0srt33v6qqe" path="res://scenes/test/npc/test_npc.gd" id="1_opaui"]
 [ext_resource type="Script" uid="uid://d23mpgtt6pctj" path="res://scenes/test/player/detectors.gd" id="2_ilhjp"]
 [ext_resource type="Shader" uid="uid://dm61er4ww4lh4" path="res://scenes/test/npc/test_npc_shader.gdshader" id="3_opaui"]
-[ext_resource type="Texture2D" uid="uid://djrgj74ahsvkd" path="res://assets/player/WIPpunkmonk-v2-x2.png" id="3_pur5b"]
+[ext_resource type="Texture2D" uid="uid://djrgj74ahsvkd" path="res://assets/player/overworld/WIPpunkmonk-v2-x2.png" id="3_pur5b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g1ra"]
 size = Vector2(127.5, 127.5)
