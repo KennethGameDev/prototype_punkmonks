@@ -1,4 +1,4 @@
-class_name PlayerFighter
+class_name NPCFighter
 extends CharacterBody2D
 
 @onready var state_machine: StateMachine = $"StateMachine"
