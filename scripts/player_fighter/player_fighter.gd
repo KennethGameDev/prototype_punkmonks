@@ -2,8 +2,7 @@ class_name PlayerFighter
 extends CharacterBody2D
 
 @onready var state_machine: StateMachine = $"State Machine"
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@onready var animation: AnimatedSprite2D = $RYU
 
 func _ready(): state_machine.init()
 
