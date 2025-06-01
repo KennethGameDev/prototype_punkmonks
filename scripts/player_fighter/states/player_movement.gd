@@ -8,13 +8,21 @@ func enter() -> void:
 
 func exit(new_state: State = null) -> void:
 	super(new_state)
-	player.velocity.x = 0
+	#player.velocity.x = 0
 
 func process_physics(delta: float) -> State:
 	do_move(get_move_dir())
 	# TODO: [FIX] New inputs get eaten when rolling into them
 	if get_move_dir() == 0: return idle_state
 	super(delta)
+	return null
+
+func process_input(event: InputEvent) -> State:
+	super(event)
+	if event.is_action_pressed(jump_key):
+		return jump_state
+	if event.is_action_pressed(crouch_key):
+		return crouch_state
 	return null
 
 func get_move_dir() -> float:
@@ -25,11 +33,11 @@ func do_move(move_dir: float) -> void:
 	player.velocity.x = move_dir * SPEED
 	if sprite_flipped == false:
 		if move_dir > 0:
-			player.animation.play(move_f_anim)
+			player.animations.play(move_f_anim)
 		else:
-			player.animation.play(move_b_anim)
+			player.animations.play(move_b_anim)
 	else:
 		if move_dir < 0:
-			player.animation.play(move_f_anim)
+			player.animations.play(move_f_anim)
 		else:
-			player.animation.play(move_b_anim)
+			player.animations.play(move_b_anim)

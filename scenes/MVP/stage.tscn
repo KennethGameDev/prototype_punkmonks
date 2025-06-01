@@ -25,7 +25,7 @@ tile_map_data = PackedByteArray("AADn/wMAAAAGAAUAAADn/wQAAAAGAAUAAADn/wUAAAAGAAU
 tile_set = ExtResource("1_ng6vb")
 
 [node name="fighter" parent="." instance=ExtResource("2_57klg")]
-position = Vector2(-754, -193)
+position = Vector2(-764, -177)
 
 [node name="npcFighter" parent="." instance=ExtResource("3_i2s5m")]
 position = Vector2(773, -177)
@@ -34,9 +34,10 @@ position = Vector2(773, -177)
 z_index = 1
 tile_set = ExtResource("1_ng6vb")
 
-[node name="CameraPos" type="Node2D" parent="." node_paths=PackedStringArray("fighter1")]
+[node name="CameraPos" type="Node2D" parent="." node_paths=PackedStringArray("fighter1", "fighter2")]
 script = ExtResource("3_57klg")
 fighter1 = NodePath("../fighter")
+fighter2 = NodePath("../npcFighter")
 
 [node name="Camera2D" type="Camera2D" parent="CameraPos"]
 position = Vector2(0, -438)
