@@ -4,11 +4,11 @@ extends PlayerState
 const SPEED: float = 900
 
 func enter() -> void:
+	print("Movement State")
 	super()
 
 func exit(new_state: State = null) -> void:
 	super(new_state)
-	#player.velocity.x = 0
 
 func process_physics(delta: float) -> State:
 	do_move(get_move_dir())
@@ -21,8 +21,10 @@ func process_input(event: InputEvent) -> State:
 	super(event)
 	if event.is_action_pressed(jump_key):
 		return jump_state
-	if event.is_action_pressed(crouch_key):
+	elif event.is_action_pressed(crouch_key):
 		return crouch_state
+	elif event.is_action_pressed(light_atk_key) or event.is_action_pressed(heavy_atk_key):
+		return attack_state
 	return null
 
 func get_move_dir() -> float:

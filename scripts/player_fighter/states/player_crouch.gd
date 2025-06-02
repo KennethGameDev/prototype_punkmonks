@@ -24,6 +24,9 @@ func process_input(event: InputEvent) -> State:
 			return move_state
 		else:
 			return idle_state
+	elif event.is_action_pressed(light_atk_key) or event.is_action_pressed(heavy_atk_key):
+		# Transition into attack state when you actually have crouch attack animations
+		pass
 	return null
 
 func get_move_dir() -> float:

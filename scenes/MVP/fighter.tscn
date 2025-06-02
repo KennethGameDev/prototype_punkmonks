@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://dt7py11xwpl6w" path="res://scripts/player_fighter/player_fighter.gd" id="1_8g8cl"]
 [ext_resource type="SpriteFrames" uid="uid://c8vtesyqckrwx" path="res://assets/player/fighter/ryu-ONLY-FOR-TESTING.tres" id="1_dmglg"]
-[ext_resource type="Script" uid="uid://d1wfydq1cud3e" path="res://scenes/MVP/sprite_root.gd" id="2_vwl2c"]
 [ext_resource type="Script" uid="uid://u1kciasdne3a" path="res://scripts/state_machine/state_machine.gd" id="3_htdi4"]
 [ext_resource type="Script" uid="uid://kapma3gbvv7o" path="res://scripts/player_fighter/states/player_idle.gd" id="4_htdi4"]
 [ext_resource type="Script" uid="uid://cywq3ox7ha5n1" path="res://scripts/player_fighter/states/player_movement.gd" id="5_jicl2"]
 [ext_resource type="Script" uid="uid://dajtm071fjuha" path="res://scripts/player_fighter/states/player_jump.gd" id="6_wqhd3"]
 [ext_resource type="Script" uid="uid://con4d7dwdegi5" path="res://scripts/player_fighter/states/player_crouch.gd" id="7_3bqbm"]
+[ext_resource type="Script" uid="uid://noqjc1wlql3" path="res://scripts/player_fighter/states/player_attack.gd" id="8_vwl2c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sdiyx"]
 size = Vector2(427, 669)
@@ -18,12 +18,13 @@ collision_mask = 256
 script = ExtResource("1_8g8cl")
 
 [node name="SpriteRoot" type="Node2D" parent="."]
-script = ExtResource("2_vwl2c")
+position = Vector2(0, 400)
 
 [node name="RYU" type="AnimatedSprite2D" parent="SpriteRoot"]
+position = Vector2(0, -400)
 scale = Vector2(7, 7)
 sprite_frames = ExtResource("1_dmglg")
-animation = &"Idle"
+animation = &"Heavy_Atk_2"
 autoplay = "Idle"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -35,31 +36,43 @@ debug_color = Color(0.43, 0.43, 0.43, 0.439216)
 script = ExtResource("3_htdi4")
 starting_state = NodePath("S_Idle")
 
-[node name="S_Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state")]
+[node name="S_Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
 scale = Vector2(7, 7)
 script = ExtResource("4_htdi4")
 idle_state = NodePath(".")
 move_state = NodePath("../S_Movement")
 jump_state = NodePath("../S_Jump")
 crouch_state = NodePath("../S_Crouch")
+attack_state = NodePath("../S_Attacking")
 
-[node name="S_Movement" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state")]
+[node name="S_Movement" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
 script = ExtResource("5_jicl2")
 idle_state = NodePath("../S_Idle")
 move_state = NodePath(".")
 jump_state = NodePath("../S_Jump")
 crouch_state = NodePath("../S_Crouch")
+attack_state = NodePath("../S_Attacking")
 
-[node name="S_Jump" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state")]
+[node name="S_Jump" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
 script = ExtResource("6_wqhd3")
 idle_state = NodePath("../S_Idle")
 move_state = NodePath("../S_Movement")
 jump_state = NodePath(".")
 crouch_state = NodePath("../S_Crouch")
+attack_state = NodePath("../S_Attacking")
 
-[node name="S_Crouch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state")]
+[node name="S_Crouch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
 script = ExtResource("7_3bqbm")
 idle_state = NodePath("../S_Idle")
 move_state = NodePath("../S_Movement")
 jump_state = NodePath("../S_Jump")
 crouch_state = NodePath(".")
+attack_state = NodePath("../S_Attacking")
+
+[node name="S_Attacking" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
+script = ExtResource("8_vwl2c")
+idle_state = NodePath("../S_Idle")
+move_state = NodePath("../S_Movement")
+jump_state = NodePath("../S_Jump")
+crouch_state = NodePath("../S_Crouch")
+attack_state = NodePath(".")
