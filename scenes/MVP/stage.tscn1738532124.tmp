@@ -1,13 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://brn2rrfy0bli5"]
+[gd_scene load_steps=6 format=4 uid="uid://brn2rrfy0bli5"]
 
 [ext_resource type="TileSet" uid="uid://b2r7htu6mevmy" path="res://assets/environment/arenas/aplha_arena_tileset.tres" id="1_ng6vb"]
 [ext_resource type="Script" uid="uid://b7h12oliv3t3h" path="res://scenes/MVP/stage.gd" id="1_rdwx7"]
 [ext_resource type="PackedScene" uid="uid://ch7owdppqvpft" path="res://scenes/MVP/fighter.tscn" id="2_57klg"]
 [ext_resource type="Script" uid="uid://bbmdt4c6kale3" path="res://scripts/player_fighter/fight_camera_controller.gd" id="3_57klg"]
 [ext_resource type="PackedScene" uid="uid://b260qx65e12vm" path="res://scenes/MVP/npc_fighter.tscn" id="3_i2s5m"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdwx7"]
-size = Vector2(451, 1910)
 
 [node name="Stage" type="Node2D" node_paths=PackedStringArray("player1", "player2") groups=["Stage"]]
 script = ExtResource("1_rdwx7")
@@ -45,15 +42,3 @@ fighter2 = NodePath("../npcFighter")
 [node name="Camera2D" type="Camera2D" parent="CameraPos"]
 position = Vector2(0, -438)
 zoom = Vector2(0.4, 0.4)
-
-[node name="CameraBarriers" type="StaticBody2D" parent="CameraPos"]
-collision_layer = 256
-collision_mask = 512
-
-[node name="LeftBarrier" type="CollisionShape2D" parent="CameraPos/CameraBarriers"]
-position = Vector2(-1748, -438)
-shape = SubResource("RectangleShape2D_rdwx7")
-
-[node name="RightBarrier" type="CollisionShape2D" parent="CameraPos/CameraBarriers"]
-position = Vector2(1748, -438)
-shape = SubResource("RectangleShape2D_rdwx7")

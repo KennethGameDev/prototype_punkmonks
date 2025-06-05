@@ -16,7 +16,7 @@ func process_physics(delta: float) -> State:
 
 func process_input(event: InputEvent) -> State:
 	super(event)
-	if event.is_action_pressed(movement_keys):
+	if event.is_action_pressed(move_l_key) or event.is_action_pressed(move_r_key):
 		return move_state
 	elif event.is_action_pressed(jump_key):
 		return jump_state

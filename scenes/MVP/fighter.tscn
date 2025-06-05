@@ -24,7 +24,7 @@ position = Vector2(0, 400)
 position = Vector2(0, -400)
 scale = Vector2(7, 7)
 sprite_frames = ExtResource("1_dmglg")
-animation = &"Heavy_Atk_2"
+animation = &"Idle"
 autoplay = "Idle"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
