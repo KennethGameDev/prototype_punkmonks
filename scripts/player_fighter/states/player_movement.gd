@@ -2,9 +2,10 @@ class_name PlayerMovementState
 extends PlayerState
 
 const SPEED: float = 900
+var going_right: bool = true
 
 func enter() -> void:
-	print("Movement State")
+	#print("Movement State")
 	super()
 
 func exit(new_state: State = null) -> void:
@@ -28,8 +29,19 @@ func process_input(event: InputEvent) -> State:
 	return null
 
 func get_move_dir() -> float:
-	# Look here for potential fix to the above. Maybe, idk
-	return Input.get_axis(move_l_key, move_r_key)
+	var direction: int
+	
+	if direction:
+		if direction < 0:
+			going_right = false
+		elif direction > 0:
+			going_right = true
+		else:
+			pass
+	else:
+		direction = Input.get_axis(move_l_key, move_r_key)
+	
+	return direction
 
 func do_move(move_dir: float) -> void:
 	player.velocity.x = move_dir * SPEED

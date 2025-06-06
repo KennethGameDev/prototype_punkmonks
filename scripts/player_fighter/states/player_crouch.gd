@@ -3,7 +3,7 @@ extends PlayerState
 
 func enter() -> void:
 	super()
-	print("Crouch States")
+	#print("Crouch States")
 	player.velocity.x = 0
 	player.animations.play(crouch_start_anim)
 

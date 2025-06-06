@@ -13,6 +13,10 @@ config_version=5
 config/name="Prototype_PunkMonks"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
+[autoload]
+
+InputBuffer="*res://scripts/input_buffer.gd"
+
 [display]
 
 window/size/viewport_width=1280

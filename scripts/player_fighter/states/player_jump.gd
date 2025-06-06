@@ -5,7 +5,7 @@ const JUMP_FORCE: int = -2500
 
 func enter() -> void:
 	super()
-	print("Jump State")
+	#print("Jump State")
 	player.velocity.y = JUMP_FORCE
 	var move_dir: float = get_move_dir()
 	if sprite_flipped == false:

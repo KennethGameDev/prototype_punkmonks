@@ -29,7 +29,7 @@ var heavy_atk_anims: Array[String] = ["Heavy_Atk_1", "Heavy_Atk_2"]
 # State Variables
 var sprite_flipped: bool = false
 var forward_direction: int = 0
-var attack_buffer: Array[String]
+var attack_queue: Array[String] = []
 
 # Inputs Keys
 var move_l_key: String = "fight_move_l"
@@ -41,30 +41,31 @@ var heavy_atk_key: String = "fight_heavy_atk"
 
 #region Input Actions
 var move_l_actions: Array = InputMap.action_get_events(move_l_key).map(
-	func(action: InputEvent) -> InputEventAction: return action)
-		#return action.as_text().get_slice(" (", 0))
+	func(action: InputEvent) -> String:
+		return action.as_text().get_slice(" (", 0))
 var move_r_actions: Array = InputMap.action_get_events(move_r_key).map(
-	func(action: InputEvent) -> InputEventAction: return action)
-		#return action.as_text().get_slice(" (", 0))
+	func(action: InputEvent) -> String:
+		return action.as_text().get_slice(" (", 0))
 var jump_actions: Array = InputMap.action_get_events(jump_key).map(
-	func(action: InputEvent) -> InputEventAction: return action)
-		#return action.as_text().get_slice(" (", 0))
+	func(action: InputEvent) -> String:
+		return action.as_text().get_slice(" (", 0))
 var crouch_actions: Array = InputMap.action_get_events(crouch_key).map(
-	func(action: InputEvent) -> InputEventAction: return action)
-		#return action.as_text().get_slice(" (", 0))
+	func(action: InputEvent) -> String:
+		return action.as_text().get_slice(" (", 0))
 var light_attack_actions: Array = InputMap.action_get_events(light_atk_key).map(
-	func(action: InputEvent) -> InputEventAction: return action)
-		#return action.as_text().get_slice(" (", 0))
+	func(action: InputEvent) -> String:
+		return action.as_text().get_slice(" (", 0))
 var heavy_attack_actions: Array = InputMap.action_get_events(heavy_atk_key).map(
-	func(action: InputEvent) -> InputEventAction: return action)
-		#return action.as_text().get_slice(" (", 0))
+	func(action: InputEvent) -> String:
+		return action.as_text().get_slice(" (", 0))
+#endregion
 
 
 
 ## Utility Functions
 #region Addition utility functions for the player fighter
 func determine_distance_to_opponent() -> float:
-	print(stage_info.player2.position.x - player.position.x)
+	#print(stage_info.player2.position.x - player.position.x)
 	return stage_info.player2.position.x - player.position.x
 
 func determine_forward_direction() -> void:
@@ -87,19 +88,19 @@ func ground_sprite() -> void:
 	#print(player.animations.position.y)
 	player.animations.position.y = (sprite_height / 2.0) * -1
 
-func add_to_input_buffer(input_key: String) -> void:
-	attack_buffer.append(input_key)
+func add_to_attack_queue(input_key: String) -> void:
+	attack_queue.append(input_key)
 
-func clear_input_buffer() -> void:
-	attack_buffer.clear()
+func clear_attack_queue() -> void:
+	attack_queue.clear()
 
-func get_next_buffered_input() -> String:
+func get_next_queued_attack() -> String:
 	var next_input: String = ""
-	next_input = attack_buffer.pop_front()
+	next_input = attack_queue.pop_front()
 	return next_input
 
-func get_current_input_buffer() -> Array[String]:
-	return attack_buffer
+func get_current_attack_queue() -> Array[String]:
+	return attack_queue
 #endregion
 
 

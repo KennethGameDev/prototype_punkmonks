@@ -11,4 +11,6 @@ func _process(delta): state_machine.process_frame(delta)
 
 func _physics_process(delta): state_machine.process_physics(delta)
 
-func _input(event): state_machine.process_input(event)
+func _input(event): 
+	if event is not InputEventMouseMotion:
+		state_machine.process_input(event)
