@@ -28,9 +28,9 @@ func process_input(event: InputEvent) -> State:
 			if check_successful_chain_attack():
 				if i + 1 < light_atk_anims.size():
 					i += 1
-					add_to_attack_queue(light_atk_anims[i])
 				else:
 					i = 0
+				add_to_attack_queue(light_atk_anims[i])
 	
 	prints("Current:", attack_queue)
 	return null
