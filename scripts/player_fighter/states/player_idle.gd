@@ -21,7 +21,7 @@ func process_input(event: InputEvent) -> State:
 	elif event.is_action_pressed(jump_key):
 		return jump_state
 	elif event.is_action_pressed(light_atk_key) and event.is_pressed() or event.is_action_pressed(heavy_atk_key) and event.is_pressed():
-		print("Attack Input")
+		#print("Attack Input")
 		return attack_state
 	elif event.is_action_pressed(crouch_key):
 		return crouch_state

@@ -30,6 +30,7 @@ var heavy_atk_anims: Array[String] = ["Heavy_Atk_1", "Heavy_Atk_2"]
 var sprite_flipped: bool = false
 var forward_direction: int = 0
 var attack_queue: Array[String] = []
+var prev_attack_queue: Array[String] = []
 
 # Inputs Keys
 var move_l_key: String = "fight_move_l"
@@ -89,21 +90,32 @@ func ground_sprite() -> void:
 	player.animations.position.y = (sprite_height / 2.0) * -1
 
 func add_to_attack_queue(input_key: String) -> void:
+	prev_attack_queue = attack_queue
+	prints("Previous:", prev_attack_queue)
 	attack_queue.append(input_key)
 
 func clear_attack_queue() -> void:
 	attack_queue.clear()
 
 func get_next_queued_attack() -> String:
-	return attack_queue.front()
+	return attack_queue.back()
 
 func get_current_attack_queue() -> Array[String]:
 	return attack_queue
+
+func get_prev_attack_queue() -> Array[String]:
+	return prev_attack_queue
+
+func compare_queues() -> bool:
+	return prev_attack_queue == attack_queue
 #endregion
 
 
 ## Base Functions
 #region Base State class function overrides
+func process_input(event: InputEvent) -> State:
+	return null
+
 func process_frame(_delta: float) -> State:
 	ground_sprite()
 	return null
@@ -112,9 +124,6 @@ func process_physics(delta: float) -> State:
 	player.velocity.y += gravity * delta
 	player.move_and_slide()
 	determine_forward_direction()
-	return null
-
-func process_input(event: InputEvent) -> State:
 	return null
 
 func exit(new_state: State = null) -> void:

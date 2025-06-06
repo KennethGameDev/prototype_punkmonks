@@ -8,10 +8,10 @@ func enter() -> void:
 func exit(new_state: State = null) -> void:
 	pass
 
-func process_frame(delta: float) -> State:
+func process_input(event: InputEvent) -> State:
 	return null
 
-func process_input(event: InputEvent) -> State:
+func process_frame(delta: float) -> State:
 	return null
 
 func process_physics(delta: float) -> State:
