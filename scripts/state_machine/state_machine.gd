@@ -13,8 +13,9 @@ func process_frame(delta: float) -> void:
 	if new_state: change_state(new_state)
 
 func process_input(event: InputEvent) -> void:
-	var new_state: State = current_state.process_input(event)
-	if new_state: change_state(new_state)
+	if event is not InputEventMouseMotion and event.is_pressed():
+		var new_state: State = current_state.process_input(event)
+		if new_state: change_state(new_state)
 
 func process_physics(delta: float) -> void:
 	var new_state: State = current_state.process_physics(delta)

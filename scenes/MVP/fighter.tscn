@@ -24,6 +24,7 @@ position = Vector2(0, 400)
 position = Vector2(0, -400)
 scale = Vector2(7, 7)
 sprite_frames = ExtResource("1_dmglg")
+animation = &"Crouch"
 autoplay = "Idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteRoot/RYU"]

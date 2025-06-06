@@ -95,9 +95,7 @@ func clear_attack_queue() -> void:
 	attack_queue.clear()
 
 func get_next_queued_attack() -> String:
-	var next_input: String = ""
-	next_input = attack_queue.pop_front()
-	return next_input
+	return attack_queue.front()
 
 func get_current_attack_queue() -> Array[String]:
 	return attack_queue
@@ -114,6 +112,9 @@ func process_physics(delta: float) -> State:
 	player.velocity.y += gravity * delta
 	player.move_and_slide()
 	determine_forward_direction()
+	return null
+
+func process_input(event: InputEvent) -> State:
 	return null
 
 func exit(new_state: State = null) -> void:
