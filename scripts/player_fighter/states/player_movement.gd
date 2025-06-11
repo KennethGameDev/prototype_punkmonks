@@ -24,8 +24,10 @@ func process_input(event: InputEvent) -> State:
 		return jump_state
 	elif event.is_action_pressed(crouch_key):
 		return crouch_state
-	elif event.is_action_pressed(light_atk_key) or event.is_action_pressed(heavy_atk_key):
-		return attack_state
+	elif event.is_action_pressed(light_atk_key):
+		return light_attack_state
+	elif event.is_action_pressed(heavy_atk_key):
+		return heavy_attack_state
 	return null
 
 func get_move_dir() -> float:

@@ -7,16 +7,22 @@ extends State
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity", -9.8) * 4.5
 
 # Animation Names
-var idle_anim: String = "Idle"
-var move_f_anim: String = "Walk_Forward"
-var move_b_anim: String = "Walk_Backward"
-var jump_u_anim: String = "Jump_Up"
-var jump_uf_anim: String = "Jump_Forward"
-var jump_ub_anim: String = "Jump_Backward"
-var crouch_start_anim: String = "Crouch_Start"
-var crouching_anim: String = "Crouch"
-var light_atk_anims: Array[String] = ["Light_Atk_1", "Light_Atk_2", "Light_Atk_3"]
-var heavy_atk_anims: Array[String] = ["Heavy_Atk_1", "Heavy_Atk_2"]
+var idle_anim: String = "Core Combat Animations/Idle"
+var move_f_anim: String = "Core Combat Animations/Move Forward"
+var move_b_anim: String = "Core Combat Animations/Move Backward"
+var jump_u_anim: String = "Core Combat Animations/Jump Up"
+var jump_uf_anim: String = "Core Combat Animations/Jump Forward"
+var jump_ub_anim: String = "Core Combat Animations/Jump Back"
+var crouch_anim: String = "Core Combat Animations/Crouch"
+var light_atk_anims: Array[String] = [
+	"Core Combat Animations/Light Attack 1",
+	"Core Combat Animations/Light Attack 2",
+	"Core Combat Animations/Light Attack 3"
+	]
+var heavy_atk_anims: Array[String] = [
+	"Core Combat Animations/Heavy Attack 1",
+	"Core Combat Animations/Heavy Attack 2"
+	]
 
 # States
 @export_group("States")
@@ -24,11 +30,13 @@ var heavy_atk_anims: Array[String] = ["Heavy_Atk_1", "Heavy_Atk_2"]
 @export var move_state: PlayerState
 @export var jump_state: PlayerState
 @export var crouch_state: PlayerState
-@export var attack_state: PlayerState
+@export var light_attack_state: PlayerState
+@export var heavy_attack_state: PlayerState
 
 # State Variables
 var sprite_flipped: bool = false
 var forward_direction: int = 0
+var attack_index: int = 0
 var attack_queue: Array[String] = []
 var prev_attack_queue: Array[String] = []
 
@@ -81,20 +89,21 @@ func determine_forward_direction() -> void:
 	flip_sprite()
 
 func flip_sprite() -> void:
-	player.animations.set_flip_h(sprite_flipped)
+	player.animated_sprite.set_flip_h(sprite_flipped)
 
 func ground_sprite() -> void:
-	var sprite: Texture = player.animations.sprite_frames.get_frame_texture(player.animations.animation.get_basename(), 0)
+	var sprite: Texture = player.animated_sprite.sprite_frames.get_frame_texture(player.animated_sprite.animation.get_basename(), 0)
 	var sprite_height: int = sprite.get_height() * 7
-	#print(player.animations.position.y)
-	player.animations.position.y = (sprite_height / 2.0) * -1
+	player.animated_sprite.position.y = (sprite_height / 2.0) * -1
 
-func add_to_attack_queue(input_key: String) -> void:
+func add_to_attack_queue(anim_name: String) -> void:
 	prev_attack_queue = attack_queue
 	prints("Previous:", prev_attack_queue)
-	attack_queue.append(input_key)
+	attack_index += 1
+	attack_queue.append(anim_name)
 
 func clear_attack_queue() -> void:
+	attack_index = 0
 	attack_queue.clear()
 
 func get_next_queued_attack() -> String:
@@ -117,7 +126,7 @@ func process_input(event: InputEvent) -> State:
 	return null
 
 func process_frame(_delta: float) -> State:
-	ground_sprite()
+	#ground_sprite()
 	return null
 
 func process_physics(delta: float) -> State:

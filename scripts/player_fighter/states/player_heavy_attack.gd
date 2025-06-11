@@ -1,4 +1,4 @@
-class_name PlayerLightAttackState
+class_name PlayerHeavyAttackState
 extends PlayerState
 
 var i: int = 0
@@ -13,12 +13,12 @@ var current_anim_active_frames_end: int = 0
 func enter() -> void:
 	super()
 	# TODO Crouch Attack, and Jump Attack
-	# The player can enter this state from Idle, Heavy Attack, Crouch, and Jump
+	# The player can enter this state from Idle, Light Attack, Crouch, and Jump
 	# Play the first animation in the sequence
 	i = 0
 	player.velocity.x = 0
-	player.animations.play(light_atk_anims[0])
-	add_to_attack_queue(light_atk_anims[0])
+	player.animations.play(heavy_atk_anims[0])
+	add_to_attack_queue(heavy_atk_anims[0])
 	prints("Current:", get_current_attack_queue())
 
 func exit(new_state: State = null) -> void:
@@ -29,15 +29,16 @@ func process_input(event: InputEvent) -> State:
 	if event.is_pressed():
 		player_pressed_button = true
 		if player.animations.is_playing():
-			if event.is_action_pressed(light_atk_key):
-				if check_successful_chain_attack():
-					if i + 1 < light_atk_anims.size():
-						i += 1
-					else:
-						i = 0
-					add_to_attack_queue(light_atk_anims[i])
-			elif event.is_action_pressed(heavy_atk_key) and attack_chain_active:
-				return heavy_attack_state
+			if event.is_action_pressed(heavy_atk_key):
+				if get_current_attack_queue().size() >= 1:
+					if check_successful_chain_attack():
+						if i + 1 < heavy_atk_anims.size():
+							i += 1
+						else:
+							i = 0
+						add_to_attack_queue(heavy_atk_anims[i])
+			elif event.is_action_pressed(light_atk_key) and attack_chain_active:
+				return light_attack_state
 		prints("Current:", attack_queue)
 	return null
 
@@ -83,7 +84,7 @@ func check_successful_chain_attack() -> bool:
 func set_current_animation_frame(frame: int) -> void:
 	current_anim_frame = frame
 
-func set_current_animation_frame_info(number_of_frames: int, active_frame_start: int, active_frame_end: int) -> void:
+func set_current_animation_total_frames(number_of_frames: int, active_frame_start: int, active_frame_end: int) -> void:
 	current_anim_length = number_of_frames
 	current_anim_active_frames_start = active_frame_start
 	current_anim_active_frames_end = active_frame_end
