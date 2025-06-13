@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://ch7owdppqvpft"]
+[gd_scene load_steps=38 format=3 uid="uid://ch7owdppqvpft"]
 
 [ext_resource type="Script" uid="uid://dt7py11xwpl6w" path="res://scripts/player_fighter/player_fighter.gd" id="1_8g8cl"]
 [ext_resource type="SpriteFrames" uid="uid://c8vtesyqckrwx" path="res://assets/player/fighter/ryu-ONLY-FOR-TESTING.tres" id="1_dmglg"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cywq3ox7ha5n1" path="res://scripts/player_fighter/states/player_movement.gd" id="5_jicl2"]
 [ext_resource type="Script" uid="uid://dajtm071fjuha" path="res://scripts/player_fighter/states/player_jump.gd" id="6_wqhd3"]
 [ext_resource type="Script" uid="uid://con4d7dwdegi5" path="res://scripts/player_fighter/states/player_crouch.gd" id="7_3bqbm"]
+[ext_resource type="Script" uid="uid://c2lxks1v5keks" path="res://scripts/player_fighter/states/player_attack_state.gd" id="8_d6lo4"]
 [ext_resource type="Script" uid="uid://noqjc1wlql3" path="res://scripts/player_fighter/states/player_light_attack.gd" id="8_vwl2c"]
 [ext_resource type="Script" uid="uid://d2sly8ffnwfp8" path="res://scripts/player_fighter/states/player_heavy_attack.gd" id="9_ej07l"]
 
@@ -39,14 +40,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:offset")
+tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(164, -400)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ej07l"]
@@ -93,14 +94,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:offset")
+tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.285714),
-"transitions": PackedFloat32Array(1e+06, 1e+06),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(0, 0), Vector2(0, 18)]
+"values": [Vector2(0, -525), Vector2(0, -400)]
 }
 
 [sub_resource type="Animation" id="Animation_21mcl"]
@@ -137,7 +138,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../StateMachine/S_Heavy_Attack")
+tracks/2/path = NodePath("../../StateMachine/S_Attack")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -145,13 +146,13 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [11, 3, 7],
-"method": &"set_current_animation_total_frames"
+"method": &"set_current_animation_frame_info"
 }]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../StateMachine/S_Heavy_Attack")
+tracks/3/path = NodePath("../../StateMachine/S_Attack")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -195,7 +196,7 @@ tracks/3/keys = {
 tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../StateMachine/S_Heavy_Attack")
+tracks/4/path = NodePath("../../StateMachine/S_Attack")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -214,6 +215,18 @@ tracks/4/keys = {
 "args": ["done"],
 "method": &"set_current_animation_state"
 }]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(207, -525)]
 }
 
 [sub_resource type="Animation" id="Animation_mdwm2"]
@@ -246,7 +259,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../StateMachine/S_Heavy_Attack")
+tracks/2/path = NodePath("../../StateMachine/S_Attack")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -254,13 +267,13 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [16, 6, 11],
-"method": &"set_current_animation_total_frames"
+"method": &"set_current_animation_frame_info"
 }]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../StateMachine/S_Heavy_Attack")
+tracks/3/path = NodePath("../../StateMachine/S_Attack")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -319,7 +332,7 @@ tracks/3/keys = {
 tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../StateMachine/S_Heavy_Attack")
+tracks/4/path = NodePath("../../StateMachine/S_Attack")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -338,6 +351,18 @@ tracks/4/keys = {
 "args": ["done"],
 "method": &"set_current_animation_state"
 }]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(207, -525)]
 }
 
 [sub_resource type="Animation" id="Animation_jmon1"]
@@ -373,14 +398,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:offset")
+tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1e+06),
-"update": 0,
-"values": [Vector2(0, 0)]
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -525)]
 }
 
 [sub_resource type="Animation" id="Animation_e7t7j"]
@@ -410,6 +435,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 1, 6, 6, 8, 9, 9, 11, 12, 13, 14, 15, 15, 17, 18, 19, 20, 21]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -525)]
+}
 
 [sub_resource type="Animation" id="Animation_efird"]
 length = 1.50001
@@ -438,6 +475,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 1, 6, 6, 8, 9, 10, 10, 12, 13, 14, 15, 16, 16, 18, 19, 20]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -525)]
+}
 
 [sub_resource type="Animation" id="Animation_f87ba"]
 length = 1.42858
@@ -465,6 +514,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 5, 7, 8, 9, 10, 10, 12, 13, 13, 15, 16, 17, 18, 19]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -525)]
 }
 
 [sub_resource type="Animation" id="Animation_ij0d3"]
@@ -505,7 +566,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../StateMachine/S_Light_Attack")
+tracks/2/path = NodePath("../../StateMachine/S_Attack")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -519,7 +580,7 @@ tracks/2/keys = {
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../StateMachine/S_Light_Attack")
+tracks/3/path = NodePath("../../StateMachine/S_Attack")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -545,7 +606,7 @@ tracks/3/keys = {
 tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../StateMachine/S_Light_Attack")
+tracks/4/path = NodePath("../../StateMachine/S_Attack")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -564,6 +625,18 @@ tracks/4/keys = {
 "args": ["done"],
 "method": &"set_current_animation_state"
 }]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(164, -525)]
 }
 
 [sub_resource type="Animation" id="Animation_05f6j"]
@@ -596,7 +669,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../StateMachine/S_Light_Attack")
+tracks/2/path = NodePath("../../StateMachine/S_Attack")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -610,7 +683,7 @@ tracks/2/keys = {
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../StateMachine/S_Light_Attack")
+tracks/3/path = NodePath("../../StateMachine/S_Attack")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -648,7 +721,7 @@ tracks/3/keys = {
 tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../StateMachine/S_Light_Attack")
+tracks/4/path = NodePath("../../StateMachine/S_Attack")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -667,6 +740,18 @@ tracks/4/keys = {
 "args": ["done"],
 "method": &"set_current_animation_state"
 }]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(164, -525)]
 }
 
 [sub_resource type="Animation" id="Animation_6fquk"]
@@ -699,7 +784,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../StateMachine/S_Light_Attack")
+tracks/2/path = NodePath("../../StateMachine/S_Attack")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -713,7 +798,7 @@ tracks/2/keys = {
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../../StateMachine/S_Light_Attack")
+tracks/3/path = NodePath("../../StateMachine/S_Attack")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -763,7 +848,7 @@ tracks/3/keys = {
 tracks/4/type = "method"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../../StateMachine/S_Light_Attack")
+tracks/4/path = NodePath("../../StateMachine/S_Attack")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -782,6 +867,18 @@ tracks/4/keys = {
 "args": ["done"],
 "method": &"set_current_animation_state"
 }]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(164, -525)]
 }
 
 [sub_resource type="Animation" id="Animation_23vjq"]
@@ -817,14 +914,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:offset")
+tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1e+06),
-"update": 0,
-"values": [Vector2(0, 0)]
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, -525)]
 }
 
 [sub_resource type="Animation" id="Animation_u2c5j"]
@@ -858,14 +955,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:offset")
+tracks/2/path = NodePath(".:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1e+06),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -525)]
 }
 
 [sub_resource type="Animation" id="Animation_hlbhq"]
@@ -920,11 +1017,12 @@ script = ExtResource("1_8g8cl")
 position = Vector2(0, 400)
 
 [node name="RYU" type="AnimatedSprite2D" parent="SpriteRoot"]
-position = Vector2(0, -400)
+position = Vector2(164, -400)
 scale = Vector2(7, 7)
 sprite_frames = ExtResource("1_dmglg")
 animation = &"Crouch"
 autoplay = "Idle"
+offset = Vector2(0, 18)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteRoot/RYU"]
 libraries = {
@@ -932,6 +1030,7 @@ libraries = {
 &"Core Combat Animations": SubResource("AnimationLibrary_xv0yd"),
 &"Special Attack Animations": SubResource("AnimationLibrary_rvlhg")
 }
+autoplay = "Core Combat Animations/Idle"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(5.5, 51.5)
@@ -942,57 +1041,67 @@ debug_color = Color(0.43, 0.43, 0.43, 0.439216)
 script = ExtResource("3_htdi4")
 starting_state = NodePath("S_Idle")
 
-[node name="S_Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "light_attack_state", "heavy_attack_state")]
+[node name="S_Idle" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
 scale = Vector2(7, 7)
 script = ExtResource("4_htdi4")
 idle_state = NodePath(".")
 move_state = NodePath("../S_Movement")
 jump_state = NodePath("../S_Jump")
 crouch_state = NodePath("../S_Crouch")
-light_attack_state = NodePath("../S_Light_Attack")
-heavy_attack_state = NodePath("../S_Heavy_Attack")
+attack_state = NodePath("../S_Attack")
 
-[node name="S_Movement" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "light_attack_state", "heavy_attack_state")]
+[node name="S_Movement" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
 script = ExtResource("5_jicl2")
 idle_state = NodePath("../S_Idle")
 move_state = NodePath(".")
 jump_state = NodePath("../S_Jump")
 crouch_state = NodePath("../S_Crouch")
-light_attack_state = NodePath("../S_Light_Attack")
-heavy_attack_state = NodePath("../S_Heavy_Attack")
+attack_state = NodePath("../S_Attack")
 
-[node name="S_Jump" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "light_attack_state", "heavy_attack_state")]
+[node name="S_Jump" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
 script = ExtResource("6_wqhd3")
 idle_state = NodePath("../S_Idle")
 move_state = NodePath("../S_Movement")
 jump_state = NodePath(".")
 crouch_state = NodePath("../S_Crouch")
-light_attack_state = NodePath("../S_Light_Attack")
-heavy_attack_state = NodePath("../S_Heavy_Attack")
+attack_state = NodePath("../S_Attack")
 
-[node name="S_Crouch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "light_attack_state", "heavy_attack_state")]
+[node name="S_Crouch" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
 script = ExtResource("7_3bqbm")
 idle_state = NodePath("../S_Idle")
 move_state = NodePath("../S_Movement")
 jump_state = NodePath("../S_Jump")
 crouch_state = NodePath(".")
-light_attack_state = NodePath("../S_Light_Attack")
-heavy_attack_state = NodePath("../S_Heavy_Attack")
+attack_state = NodePath("../S_Attack")
 
-[node name="S_Light_Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "light_attack_state", "heavy_attack_state")]
-script = ExtResource("8_vwl2c")
+[node name="S_Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("light_attack_state", "heavy_attack_state", "idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
+script = ExtResource("8_d6lo4")
+light_attack_state = NodePath("S_Light_Attack")
+heavy_attack_state = NodePath("S_Heavy_Attack")
 idle_state = NodePath("../S_Idle")
 move_state = NodePath("../S_Movement")
 jump_state = NodePath("../S_Jump")
 crouch_state = NodePath("../S_Crouch")
+attack_state = NodePath(".")
+
+[node name="S_Light_Attack" type="Node2D" parent="StateMachine/S_Attack" node_paths=PackedStringArray("light_attack_state", "heavy_attack_state", "idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
+script = ExtResource("8_vwl2c")
 light_attack_state = NodePath(".")
 heavy_attack_state = NodePath("../S_Heavy_Attack")
+idle_state = NodePath("../../S_Idle")
+move_state = NodePath("../../S_Movement")
+jump_state = NodePath("../../S_Jump")
+crouch_state = NodePath("../../S_Crouch")
+attack_state = NodePath("..")
 
-[node name="S_Heavy_Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("idle_state", "move_state", "jump_state", "crouch_state", "light_attack_state", "heavy_attack_state")]
+[node name="S_Heavy_Attack" type="Node2D" parent="StateMachine/S_Attack" node_paths=PackedStringArray("light_attack_state", "heavy_attack_state", "idle_state", "move_state", "jump_state", "crouch_state", "attack_state")]
 script = ExtResource("9_ej07l")
-idle_state = NodePath("../S_Idle")
-move_state = NodePath("../S_Movement")
-jump_state = NodePath("../S_Jump")
-crouch_state = NodePath("../S_Crouch")
 light_attack_state = NodePath("../S_Light_Attack")
 heavy_attack_state = NodePath(".")
+idle_state = NodePath("../../S_Idle")
+move_state = NodePath("../../S_Movement")
+jump_state = NodePath("../../S_Jump")
+crouch_state = NodePath("../../S_Crouch")
+attack_state = NodePath("..")
+
+[node name="S_Hit" type="Node2D" parent="StateMachine"]
