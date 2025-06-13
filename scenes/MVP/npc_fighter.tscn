@@ -1,13 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://b260qx65e12vm"]
+[gd_scene load_steps=9 format=3 uid="uid://b260qx65e12vm"]
 
 [ext_resource type="Script" uid="uid://cr8411ur6hflf" path="res://scripts/npc_fighter/npc_fighter.gd" id="1_nyfy8"]
 [ext_resource type="SpriteFrames" uid="uid://c8vtesyqckrwx" path="res://assets/player/fighter/ryu-ONLY-FOR-TESTING.tres" id="2_xqkp0"]
 [ext_resource type="Script" uid="uid://u1kciasdne3a" path="res://scripts/state_machine/state_machine.gd" id="3_3ai2r"]
 [ext_resource type="Script" uid="uid://b05is1jirs3u4" path="res://scripts/npc_fighter/states/npc_idle.gd" id="4_nyfy8"]
 [ext_resource type="Script" uid="uid://gqitdm8to0b3" path="res://scripts/npc_fighter/states/npc_movement.gd" id="5_xqkp0"]
+[ext_resource type="Script" uid="uid://bv5ab2or6lf6a" path="res://scripts/player_fighter/player_hurt_box.gd" id="6_xqkp0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sdiyx"]
 size = Vector2(427, 669)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ai2r"]
+size = Vector2(464, 731)
 
 [node name="NPCFight" type="CharacterBody2D" groups=["NPC"]]
 collision_layer = 512
@@ -40,3 +44,10 @@ move_state = NodePath("../S_Movement")
 script = ExtResource("5_xqkp0")
 idle_state = NodePath("../S_Idle")
 move_state = NodePath(".")
+
+[node name="HurtBox" type="Area2D" parent="."]
+script = ExtResource("6_xqkp0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(12, 25.5)
+shape = SubResource("RectangleShape2D_3ai2r")

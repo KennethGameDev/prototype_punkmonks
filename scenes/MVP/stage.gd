@@ -1,5 +1,5 @@
 class_name StageInfo
 extends Node2D
 
-@export var player1: PlayerFighter
-@export var player2: NPCFighter
+var player1 := preload("res://scenes/MVP/fighter.tscn")
+var player2 := preload("res://scenes/MVP/fighter.tscn")

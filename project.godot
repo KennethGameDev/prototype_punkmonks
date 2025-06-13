@@ -170,6 +170,10 @@ fight_grab={
 2d_physics/layer_5="NPC"
 2d_physics/layer_9="Arena"
 2d_physics/layer_10="Fighter"
+2d_physics/layer_11="Player1HitBox"
+2d_physics/layer_12="Player1HurtBox"
+2d_physics/layer_13="Player2Hitbox"
+2d_physics/layer_14="Player2HurtBox"
 
 [physics]
 
