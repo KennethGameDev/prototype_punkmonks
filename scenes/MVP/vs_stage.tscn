@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://qgy3i2tqb6em"]
+
+[ext_resource type="Script" uid="uid://485f6rig3d8b" path="res://addons/MultiplayCore/MPBase.gd" id="1_r0swy"]
+[ext_resource type="Script" uid="uid://quxxbxx7gmt6" path="res://addons/MultiplayCore/MultiPlay.gd" id="4_rja6u"]
+[ext_resource type="PackedScene" uid="uid://ch7owdppqvpft" path="res://scenes/MVP/fighter.tscn" id="5_11cux"]
+[ext_resource type="Script" uid="uid://xaog62iejvnx" path="res://addons/MultiplayCore/net_protocols/ENetProtocol.gd" id="5_bnydy"]
+[ext_resource type="Script" uid="uid://db3x2t6haask3" path="res://addons/MultiplayCore/MPIO.gd" id="6_c7wc2"]
+[ext_resource type="PackedScene" uid="uid://brn2rrfy0bli5" path="res://scenes/MVP/stage.tscn" id="6_rja6u"]
+
+[node name="VS_Stage(MPBase)" type="Node"]
+script = ExtResource("1_r0swy")
+metadata/_custom_type_script = "uid://485f6rig3d8b"
+
+[node name="MultiPlayCore" type="Node" parent="."]
+script = ExtResource("4_rja6u")
+player_scene = ExtResource("5_11cux")
+first_scene = ExtResource("6_rja6u")
+swap_input_action = "swap_characters_DEBUG"
+metadata/_custom_type_script = "uid://quxxbxx7gmt6"
+
+[node name="ENetProtocol" type="Node" parent="MultiPlayCore"]
+script = ExtResource("5_bnydy")
+metadata/_custom_type_script = "uid://xaog62iejvnx"
+
+[node name="MultiPlayIO" type="Node" parent="."]
+script = ExtResource("6_c7wc2")
+metadata/_custom_type_script = "uid://db3x2t6haask3"

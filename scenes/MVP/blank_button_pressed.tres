@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cafb45b4kjnkn"]
+
+[ext_resource type="Texture2D" uid="uid://b3rjy4bhgt3s0" path="res://assets/Sprout Lands - UI Pack - Premium pack/UI Sprites/ALL UI ASSETS on one sheet.png" id="1_47exv"]
+
+[resource]
+texture = ExtResource("1_47exv")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(107, 107, 26, 26)

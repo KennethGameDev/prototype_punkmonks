@@ -1,0 +1,96 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://ccm5jxuql5lku"]
+
+[ext_resource type="FontFile" uid="uid://b3u0pky25qncr" path="res://assets/Sprout Lands - UI Pack - Premium pack/fonts/pixelFont-7-8x14-sproutLands.ttf" id="1_ds265"]
+[ext_resource type="Texture2D" uid="uid://b3rjy4bhgt3s0" path="res://assets/Sprout Lands - UI Pack - Premium pack/UI Sprites/ALL UI ASSETS on one sheet.png" id="2_xe37h"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g0evh"]
+texture = ExtResource("2_xe37h")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(107, 11, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ds265"]
+texture = ExtResource("2_xe37h")
+texture_margin_left = 9.0
+texture_margin_top = 10.0
+texture_margin_right = 9.0
+texture_margin_bottom = 10.0
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+region_rect = Rect2(260, 244, 24, 25)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g3drx"]
+texture = ExtResource("2_xe37h")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(11, 107, 26, 28)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yjxva"]
+texture = ExtResource("2_xe37h")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(59, 107, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t5vhy"]
+texture = ExtResource("2_xe37h")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(107, 107, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v0s32"]
+texture = ExtResource("2_xe37h")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(107, 107, 26, 26)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tb0jh"]
+texture_margin_left = 2.0
+texture_margin_top = 4.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+region_rect = Rect2(674, 137, 28, 14)
+
+[resource]
+Button/colors/font_color = Color(0.662745, 0.45098, 0.2, 1)
+Button/colors/font_disabled_color = Color(0.852891, 0.605306, 0.322691, 1)
+Button/colors/font_focus_color = Color(0.662745, 0.45098, 0.2, 1)
+Button/colors/font_hover_color = Color(0.662745, 0.45098, 0.2, 1)
+Button/colors/font_hover_pressed_color = Color(0.662745, 0.45098, 0.2, 1)
+Button/colors/font_pressed_color = Color(0.490973, 0.32745, 0.131837, 1)
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("1_ds265")
+Button/styles/disabled = SubResource("StyleBoxTexture_g0evh")
+Button/styles/disabled_mirrored = SubResource("StyleBoxTexture_g0evh")
+Button/styles/focus = SubResource("StyleBoxTexture_ds265")
+Button/styles/hover = SubResource("StyleBoxTexture_g3drx")
+Button/styles/hover_mirrored = SubResource("StyleBoxTexture_g3drx")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_g3drx")
+Button/styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_g3drx")
+Button/styles/normal = SubResource("StyleBoxTexture_yjxva")
+Button/styles/normal_mirrored = SubResource("StyleBoxTexture_yjxva")
+Button/styles/pressed = SubResource("StyleBoxTexture_t5vhy")
+Button/styles/pressed_mirrored = SubResource("StyleBoxTexture_v0s32")
+Label/colors/font_color = Color(0.338412, 0.219996, 0.0778787, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/paragraph_spacing = 0
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2
+Label/constants/shadow_outline_size = 2
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_ds265")
+Label/styles/normal = SubResource("StyleBoxTexture_tb0jh")

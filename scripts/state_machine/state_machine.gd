@@ -1,10 +1,9 @@
 class_name StateMachine
 extends Node2D
 
-
+@export var starting_state: State
 var current_state: State
 
-@export var starting_state: State
 
 func init() -> void: change_state(starting_state)
 

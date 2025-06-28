@@ -1,13 +1,12 @@
 class_name CameraControllerFight
 extends Node2D
 
-@export var stage_info: StageInfo
-var fighter1: PlayerFighter
-var fighter2: PlayerFighter
-
-func _ready() -> void:
-	fighter1 = stage_info.player1
-	fighter2 = stage_info.player2
+var player_1: PlayerFighter
+var player_2: PlayerFighter
 
 func _physics_process(delta: float) -> void:
-	position.x = (fighter1.position.x + fighter2.position.x) / 2
+	position.x = (player_1.position.x + player_2.position.x) / 2
+
+func set_players(p1: PlayerFighter, p2: PlayerFighter) -> void:
+	player_1 = p1
+	player_2 = p2
