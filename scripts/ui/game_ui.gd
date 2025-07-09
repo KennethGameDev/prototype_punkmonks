@@ -4,35 +4,50 @@ extends Control
 var current_level_name: String = ""
 var active_hud: int = -1
 var go_back_list: Array
-var current_menu: int = -1
 var start_in_main_menu: bool = true
+var current_menu: int = -1
+# 0: Overworld UI
+# 1: Fighting UI
+# 2: Main Menu
+# 3: VS Mode Menu
+# 4: Pause Screen
+# 5: Settings
+# 6: Character Select Screen (VS Mode)
+# 7: Controller Disconnected Screen
 signal on_paused_game_pressed(level_name: String)
+signal update_disconnect_screen(player_index: int)
 
 func _ready() -> void:
 	pass
 
+# Counts up as long as the pause button is pressed down during gameplay
+# and resets after the button is released. This prevents the pause menu
+# from closing instantly after the player releases the button that opened it.
 var button_counter: float = 0
 func _physics_process(delta: float) -> void:
-	# In-Game HUDs
-	if current_menu == 0 or current_menu == 1:
-		if Input.is_action_just_pressed("menu_back"):
+	## Pressing the Pause button ##
+	# Pressing the Pause button in game (activates on press)
+	if current_menu <= 1:
+		if Input.is_action_just_pressed("pause"):
+			# Button counter becomes > 0
 			button_counter += delta
 			pause_game_pressed()
-	# Menu screens
-	elif current_menu >= 2:
-		if Input.is_action_just_released("menu_back"):
-			if button_counter == 0:
-				# Main Menu
+	# Pressing the Pause button in the Menu (activates on release)
+	else:
+		if Input.is_action_just_released("pause"):
+			if button_counter == 0: # Block the release action that fires after opening the menu
+				# If the Main Menu is open
 				if current_menu == 2:
 					on_quit_game_button_released()
-				# Main Menu Settings Page and Pause Screen Settings Page
-				elif current_menu == 3 or current_menu == 5:
-					swap_menu_to_previous()
-				# Pause Screen
+				# If the Pause Screen is open
 				elif current_menu == 4:
 					pause_game_pressed()
-			else:
+				# If the Settings Page is open
+				elif current_menu == 5:
+					swap_menu_to_previous()
+			else: # Use that blocked release action to clear the counter so the next release action can be processed normally
 				button_counter = 0
+	pass
 
 func pause_game_pressed() -> void:
 	if !get_tree().paused:
@@ -41,14 +56,15 @@ func pause_game_pressed() -> void:
 		swap_menu_request(4, current_menu)
 	else:
 		get_tree().paused = false
+		button_counter = 0
 		swap_menu_request(active_hud, current_menu)
 
-func set_current_level_info(level_name: String, menu_start: bool) -> void:
-	current_level_name = level_name
-	start_in_main_menu = menu_start
+func on_stage_set_current_level_info() -> void:
+	#current_level_name = level_name
+	#start_in_main_menu = menu_start
 	
+	# Fallback to Main Menu if no level is found
 	if current_level_name == "":
-		# Fallback to Main Menu if no level is found
 		active_hud = 2
 	
 	if current_level_name == "TestOverworld":
@@ -90,7 +106,10 @@ func swap_menu_request(menu_index: int, return_index: int) -> void:
 	
 	if start_in_main_menu and !game_started_once:
 		game_started_once = true
-		swap_menu_request(2, current_menu)
+		if current_level_name == "TestOverworld":
+			swap_menu_request(2, current_menu)
+		if current_level_name == "Stage":
+			swap_menu_request(3, current_menu)
 
 func swap_menu_to_previous() -> void:
 	if go_back_list.is_empty():
@@ -116,3 +135,14 @@ func on_switch_game_mode(game_mode_1: PackedScene, game_mode_2: PackedScene) -> 
 
 func on_quit_game_button_released() -> void:
 	get_tree().quit()
+
+func on_controller_connected() -> void:
+	pass
+
+func on_controller_disconnected(player_index: int) -> void:
+	emit_signal("update_disconnect_screen", player_index)
+	swap_menu_request(7, current_menu)
+	get_tree().paused = true
+	
+func on_controller_reconnected() -> void:
+	swap_menu_request(4, current_menu)

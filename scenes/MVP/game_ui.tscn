@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dpjan4v2xq00l"]
+[gd_scene load_steps=19 format=3 uid="uid://dpjan4v2xq00l"]
 
 [ext_resource type="Script" uid="uid://dp7t63xcla1pb" path="res://scripts/ui/game_ui.gd" id="1_u8ktk"]
 [ext_resource type="Texture2D" uid="uid://b3rjy4bhgt3s0" path="res://assets/Sprout Lands - UI Pack - Premium pack/UI Sprites/ALL UI ASSETS on one sheet.png" id="2_nk8vc"]
@@ -10,24 +10,24 @@
 [ext_resource type="Script" uid="uid://pgabbnll6eps" path="res://scripts/ui/pause_button.gd" id="9_fbml3"]
 [ext_resource type="Script" uid="uid://dcf87jgp0gdh2" path="res://scripts/ui/return_button.gd" id="9_sb36x"]
 [ext_resource type="Script" uid="uid://c328rlgsbjtgq" path="res://scripts/ui/switch_game_mode_button.gd" id="10_fbml3"]
+[ext_resource type="Texture2D" uid="uid://blxsk1ycrie7v" path="res://assets/player/fighter/fighter-Tyrell-V1-shiny.png" id="11_8mgtm"]
+[ext_resource type="Script" uid="uid://bgfa074o438wm" path="res://scripts/ui/label_disconnected_context.gd" id="12_xshwr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m363j"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_u8ktk"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fbml3"]
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nk8vc"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i3dfh"]
 texture = ExtResource("2_nk8vc")
-region_rect = Rect2(133, 708, 22, 24)
+region_rect = Rect2(133, 740, 22, 24)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g0evh"]
 texture = ExtResource("2_nk8vc")
-region_rect = Rect2(165, 710, 22, 22)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fbml3"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sb36x"]
+region_rect = Rect2(165, 742, 22, 22)
 
 [node name="GameUI" type="Control"]
 process_mode = 3
@@ -161,7 +161,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("3_sb36x")
 theme_override_font_sizes/font_size = 24
-text = "Single Player"
+text = "Start Game"
 script = ExtResource("4_u8ktk")
 
 [node name="VSMode" type="Button" parent="MainMenuScreen/Margin/Background/MarginContainer/VBoxContainer"]
@@ -183,7 +183,7 @@ theme = ExtResource("3_sb36x")
 theme_override_font_sizes/font_size = 24
 text = "Settings"
 script = ExtResource("7_a0oyh")
-switch_to_node = NodePath("../../../../../../MMSettings")
+switch_to_node = NodePath("../../../../../../SettingsScreen")
 current_node = NodePath("../../../../..")
 
 [node name="Quit" type="Button" parent="MainMenuScreen/Margin/Background/MarginContainer/VBoxContainer"]
@@ -196,7 +196,7 @@ theme_override_font_sizes/font_size = 24
 text = "Quit"
 script = ExtResource("8_nk8vc")
 
-[node name="MMSettings" type="PanelContainer" parent="."]
+[node name="VSModeMenuScreen" type="PanelContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -204,14 +204,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_nk8vc")
+theme_override_styles/panel = SubResource("StyleBoxTexture_u8ktk")
 
-[node name="Margin" type="MarginContainer" parent="MMSettings"]
+[node name="Margin" type="MarginContainer" parent="VSModeMenuScreen"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Background" type="NinePatchRect" parent="MMSettings/Margin"]
+[node name="Background" type="NinePatchRect" parent="VSModeMenuScreen/Margin"]
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
 texture = ExtResource("2_nk8vc")
@@ -221,7 +221,7 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="MMSettings/Margin/Background"]
+[node name="MarginContainer" type="MarginContainer" parent="VSModeMenuScreen/Margin/Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -233,28 +233,79 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="Title" type="Label" parent="MMSettings/Margin/Background/MarginContainer"]
+[node name="Title" type="Label" parent="VSModeMenuScreen/Margin/Background/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("3_sb36x")
 theme_override_font_sizes/font_size = 48
-text = "\"Settings\""
+text = "VS Mode Demo"
 horizontal_alignment = 1
 
-[node name="Return" type="Button" parent="MMSettings/Margin/Background/MarginContainer"]
-custom_minimum_size = Vector2(35, 35)
+[node name="VBoxContainer" type="VBoxContainer" parent="VSModeMenuScreen/Margin/Background/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VSModeMenuScreen/Margin/Background/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="LocalPlay" type="Button" parent="VSModeMenuScreen/Margin/Background/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("3_sb36x")
 theme_override_font_sizes/font_size = 24
-theme_override_styles/hover = SubResource("StyleBoxTexture_i3dfh")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_g0evh")
-theme_override_styles/normal = SubResource("StyleBoxTexture_g0evh")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("9_sb36x")
+text = "Local Play"
+script = ExtResource("5_sb36x")
+
+[node name="Online Play" type="Button" parent="VSModeMenuScreen/Margin/Background/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_sb36x")
+theme_override_font_sizes/font_size = 24
+text = "Online Play"
+
+[node name="SinglePlayer" type="Button" parent="VSModeMenuScreen/Margin/Background/MarginContainer/VBoxContainer" node_paths=PackedStringArray("switch_to_node", "current_node")]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_sb36x")
+theme_override_font_sizes/font_size = 24
+text = "Single Player"
+script = ExtResource("7_a0oyh")
+switch_to_node = NodePath("../../../../../../SettingsScreen")
+current_node = NodePath("../../../../..")
+
+[node name="Settings" type="Button" parent="VSModeMenuScreen/Margin/Background/MarginContainer/VBoxContainer" node_paths=PackedStringArray("switch_to_node", "current_node")]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_sb36x")
+theme_override_font_sizes/font_size = 24
+text = "Settings"
+script = ExtResource("7_a0oyh")
+switch_to_node = NodePath("../../../../../../SettingsScreen")
+current_node = NodePath("../../../../..")
+
+[node name="Quit" type="Button" parent="VSModeMenuScreen/Margin/Background/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_sb36x")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+script = ExtResource("8_nk8vc")
 
 [node name="PauseScreen" type="PanelContainer" parent="."]
 visible = false
@@ -288,7 +339,7 @@ grow_vertical = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 15
+theme_override_constants/margin_bottom = 30
 
 [node name="Title" type="Label" parent="PauseScreen/Background/MarginContainer"]
 layout_mode = 2
@@ -303,7 +354,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-theme_override_constants/separation = 10
+theme_override_constants/separation = 20
 
 [node name="Return" type="Button" parent="PauseScreen/Background/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 50)
@@ -325,7 +376,7 @@ theme_override_font_sizes/font_size = 24
 text = "---"
 script = ExtResource("10_fbml3")
 
-[node name="Settings" type="Button" parent="PauseScreen/Background/MarginContainer/VBoxContainer" node_paths=PackedStringArray("switch_to_node", "current_node")]
+[node name="Settings" type="Button" parent="PauseScreen/Background/MarginContainer/VBoxContainer" node_paths=PackedStringArray("current_node")]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -334,7 +385,6 @@ theme = ExtResource("3_sb36x")
 theme_override_font_sizes/font_size = 24
 text = "Settings"
 script = ExtResource("7_a0oyh")
-switch_to_node = NodePath("../../../../../PSSettings")
 current_node = NodePath("../../../..")
 
 [node name="Quit" type="Button" parent="PauseScreen/Background/MarginContainer/VBoxContainer"]
@@ -347,7 +397,7 @@ theme_override_font_sizes/font_size = 24
 text = "Quit"
 script = ExtResource("8_nk8vc")
 
-[node name="PSSettings" type="PanelContainer" parent="."]
+[node name="SettingsScreen" type="PanelContainer" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -355,14 +405,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_sb36x")
+theme_override_styles/panel = SubResource("StyleBoxTexture_nk8vc")
 
-[node name="Margin" type="MarginContainer" parent="PSSettings"]
+[node name="Margin" type="MarginContainer" parent="SettingsScreen"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Background" type="NinePatchRect" parent="PSSettings/Margin"]
+[node name="Background" type="NinePatchRect" parent="SettingsScreen/Margin"]
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 2
 texture = ExtResource("2_nk8vc")
@@ -372,7 +422,7 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="PSSettings/Margin/Background"]
+[node name="MarginContainer" type="MarginContainer" parent="SettingsScreen/Margin/Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -384,7 +434,7 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="Title" type="Label" parent="PSSettings/Margin/Background/MarginContainer"]
+[node name="Title" type="Label" parent="SettingsScreen/Margin/Background/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -393,7 +443,7 @@ theme_override_font_sizes/font_size = 48
 text = "\"Settings\""
 horizontal_alignment = 1
 
-[node name="Return" type="Button" parent="PSSettings/Margin/Background/MarginContainer"]
+[node name="Return" type="Button" parent="SettingsScreen/Margin/Background/MarginContainer"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -407,14 +457,219 @@ icon_alignment = 1
 expand_icon = true
 script = ExtResource("9_sb36x")
 
+[node name="CharacterSelectScreen" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_nk8vc")
+
+[node name="Margin" type="MarginContainer" parent="CharacterSelectScreen"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Background" type="NinePatchRect" parent="CharacterSelectScreen/Margin"]
+custom_minimum_size = Vector2(600, 550)
+layout_mode = 2
+texture = ExtResource("2_nk8vc")
+region_rect = Rect2(107, 107, 26, 26)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="CharacterSelectScreen/Margin/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Title" type="Label" parent="CharacterSelectScreen/Margin/Background/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("3_sb36x")
+theme_override_font_sizes/font_size = 48
+text = "Character Select"
+horizontal_alignment = 1
+
+[node name="Return" type="Button" parent="CharacterSelectScreen/Margin/Background/MarginContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("3_sb36x")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/hover = SubResource("StyleBoxTexture_i3dfh")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_g0evh")
+theme_override_styles/normal = SubResource("StyleBoxTexture_g0evh")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("9_sb36x")
+
+[node name="MarginContainer" type="MarginContainer" parent="CharacterSelectScreen/Margin/Background/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 75
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_sb36x")
+theme_override_font_sizes/font_size = 24
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="Spacer" type="MarginContainer" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Punk" type="Button" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_sb36x")
+toggle_mode = true
+text = "Punk"
+icon = ExtResource("11_8mgtm")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="Punk (Alt)" type="Button" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_sb36x")
+toggle_mode = true
+text = "Punk (Alt)"
+icon = ExtResource("11_8mgtm")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_sb36x")
+theme_override_font_sizes/font_size = 24
+text = "Player 2"
+horizontal_alignment = 1
+
+[node name="Spacer" type="MarginContainer" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="Punk" type="Button" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_sb36x")
+toggle_mode = true
+text = "Punk"
+icon = ExtResource("11_8mgtm")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="Punk (Alt)" type="Button" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_sb36x")
+toggle_mode = true
+text = "Punk (Alt)"
+icon = ExtResource("11_8mgtm")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+
+[node name="Button" type="Button" parent="CharacterSelectScreen/Margin/Background/MarginContainer/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("3_sb36x")
+text = "Fight"
+
+[node name="ControllerDisconnectedScreen" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ControllerDisconnectedScreen"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ControllerDisconnectedScreen/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("3_sb36x")
+theme_override_constants/line_spacing = 60
+theme_override_font_sizes/font_size = 36
+text = "Controller Diconnected...
+Reconnect to continue"
+horizontal_alignment = 1
+script = ExtResource("12_xshwr")
+
 [connection signal="on_paused_game_pressed" from="." to="PauseScreen/Background/MarginContainer/VBoxContainer/SwitchGameMode" method="on_paused_game_pressed"]
+[connection signal="update_disconnect_screen" from="." to="ControllerDisconnectedScreen/MarginContainer/Label" method="update_disconnect_screen"]
 [connection signal="start_singleplayer_request" from="MainMenuScreen/Margin/Background/MarginContainer/VBoxContainer/SinglePlayer" to="." method="start_singleplayer_request"]
 [connection signal="start_vs_mode_request" from="MainMenuScreen/Margin/Background/MarginContainer/VBoxContainer/VSMode" to="." method="start_vs_mode_request"]
 [connection signal="swap_menu_request" from="MainMenuScreen/Margin/Background/MarginContainer/VBoxContainer/Settings" to="." method="swap_menu_request"]
 [connection signal="quit_game_request" from="MainMenuScreen/Margin/Background/MarginContainer/VBoxContainer/Quit" to="." method="on_quit_game_button_released"]
-[connection signal="swap_menu_to_previous" from="MMSettings/Margin/Background/MarginContainer/Return" to="." method="swap_menu_to_previous"]
+[connection signal="start_vs_mode_request" from="VSModeMenuScreen/Margin/Background/MarginContainer/VBoxContainer/HBoxContainer/LocalPlay" to="." method="start_vs_mode_request"]
+[connection signal="swap_menu_request" from="VSModeMenuScreen/Margin/Background/MarginContainer/VBoxContainer/SinglePlayer" to="." method="swap_menu_request"]
+[connection signal="swap_menu_request" from="VSModeMenuScreen/Margin/Background/MarginContainer/VBoxContainer/Settings" to="." method="swap_menu_request"]
+[connection signal="quit_game_request" from="VSModeMenuScreen/Margin/Background/MarginContainer/VBoxContainer/Quit" to="." method="on_quit_game_button_released"]
 [connection signal="pause_game_request" from="PauseScreen/Background/MarginContainer/VBoxContainer/Return" to="." method="pause_game_pressed"]
 [connection signal="on_switch_game_mode" from="PauseScreen/Background/MarginContainer/VBoxContainer/SwitchGameMode" to="." method="on_switch_game_mode"]
 [connection signal="swap_menu_request" from="PauseScreen/Background/MarginContainer/VBoxContainer/Settings" to="." method="swap_menu_request"]
 [connection signal="quit_game_request" from="PauseScreen/Background/MarginContainer/VBoxContainer/Quit" to="." method="on_quit_game_button_released"]
-[connection signal="swap_menu_to_previous" from="PSSettings/Margin/Background/MarginContainer/Return" to="." method="swap_menu_to_previous"]
+[connection signal="swap_menu_to_previous" from="SettingsScreen/Margin/Background/MarginContainer/Return" to="." method="swap_menu_to_previous"]
+[connection signal="swap_menu_to_previous" from="CharacterSelectScreen/Margin/Background/MarginContainer/Return" to="." method="swap_menu_to_previous"]

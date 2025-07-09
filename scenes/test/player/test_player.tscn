@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bpaji1sbrdiu3"]
 
-[ext_resource type="Script" uid="uid://c6lg0vq8ydo22" path="res://scripts/player/player_overworld.gd" id="1_iuw3c"]
+[ext_resource type="Script" uid="uid://c6lg0vq8ydo22" path="res://scripts/player_overworld/player_overworld.gd" id="1_iuw3c"]
 [ext_resource type="Script" uid="uid://d23mpgtt6pctj" path="res://scenes/test/player/detectors.gd" id="2_5aguw"]
 [ext_resource type="SpriteFrames" uid="uid://dgu67pq6m0rlb" path="res://assets/player/Delivery/player_anims_by_Tyrell.tres" id="3_5aguw"]
 

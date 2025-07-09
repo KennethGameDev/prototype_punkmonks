@@ -1,14 +1,18 @@
 class_name PlayerFighter
 extends CharacterBody2D
 
-@onready var state_machine: StateMachine = $"StateMachine"
+@onready var stage = get_tree().get_first_node_in_group("Stage")
 @onready var sprite_root: Node2D = $SpriteRoot
 @onready var animated_sprite: AnimatedSprite2D = $SpriteRoot/RYU
 @onready var animations: AnimationPlayer = $SpriteRoot/RYU/AnimationPlayer
 
 var player_id: int
+var device: int
+var state_machine_scene: PackedScene = preload("res://scenes/MVP/state_machine.tscn")
+var state_machine: StateMachine
+var input_map: Dictionary
 var opponent: PlayerFighter
-var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity", -9.8) * 4.5
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity", -9.8) * 3
 var sprite_flipped: bool = false
 var forward_direction: int = 0
 var last_pressed_key: String = ""
@@ -59,94 +63,74 @@ var heavy_atk_anim_index: int = 0
 #endregion
 
 #region: Inputs Keys
-var move_l_key: String = "fight_move_l"
-var move_r_key: String = "fight_move_r"
-var jump_key: String = "fight_jump"
-var crouch_key: String = "fight_crouch"
-var light_atk_key: String = "fight_light_atk"
-var heavy_atk_key: String = "fight_heavy_atk"
-var special_atk_1_key: String = "fight_special_atk_1"
-var special_atk_2_key: String = "fight_special_atk_2"
-var block_key: String = "fight_block"
-var grab_key: String = "fight_grab"
-#endregion
-
-#region: Input Actions
-var move_l_actions: Array = InputMap.action_get_events(move_l_key).map(
-	func(action: InputEvent) -> String: 
-		return action.as_text().get_slice(" (", 0))
-var move_r_actions: Array = InputMap.action_get_events(move_r_key).map(
-	func(action: InputEvent) -> String:
-		return action.as_text().get_slice(" (", 0))
-var jump_actions: Array = InputMap.action_get_events(jump_key).map(
-	func(action: InputEvent) -> String:
-		return action.as_text().get_slice(" (", 0))
-var crouch_actions: Array = InputMap.action_get_events(crouch_key).map(
-	func(action: InputEvent) -> String:
-		return action.as_text().get_slice(" (", 0))
-var light_attack_actions: Array = InputMap.action_get_events(light_atk_key).map(
-	func(action: InputEvent) -> String:
-		return action.as_text().get_slice(" (", 0))
-var heavy_attack_actions: Array = InputMap.action_get_events(heavy_atk_key).map(
-	func(action: InputEvent) -> String:
-		return action.as_text().get_slice(" (", 0))
-var special_attack_1_actions: Array = InputMap.action_get_events(special_atk_1_key).map(
-	func(action: InputEvent) -> String:
-		return action.as_text().get_slice(" (", 0))
-var special_attack_2_actions: Array = InputMap.action_get_events(special_atk_2_key).map(
-	func(action: InputEvent) -> String:
-		return action.as_text().get_slice(" (", 0))
-var block_actions: Array = InputMap.action_get_events(block_key).map(
-	func(action: InputEvent) -> String:
-		return action.as_text().get_slice(" (", 0))
-var grab_actions: Array = InputMap.action_get_events(grab_key).map(
-	func(action: InputEvent) -> String:
-		return action.as_text().get_slice(" (", 0))
+var move_l_key: String
+var move_r_key: String
+var jump_key: String
+var crouch_key: String
+var light_atk_key: String
+var heavy_atk_key: String
+var special_atk_1_key: String
+var special_atk_2_key: String
+var block_key: String
+var grab_key: String
 #endregion
 
 var single_input: bool = false
 
-#func _init() -> void:
-
 func _ready():
-	state_machine.init()
+	move_l_key = input_map.keys()[0]
+	move_r_key = input_map.keys()[1]
+	jump_key = input_map.keys()[2]
+	crouch_key = input_map.keys()[3]
+	
+	state_machine = state_machine_scene.instantiate()
+	state_machine.state_machine_owner = self
+	state_machine.state_machine_owner_id = player_id
+	state_machine.default_starting_state = "S_Idle"
+	add_child(state_machine)
 
 func _input(event):
-	if event is not InputEventMouseMotion:
-		if event.is_pressed() and event.device == player_id:
-			prints(name, event.device, move_l_key)
-			#if event.is_action_pressed(move_l_key):
-				#last_pressed_key = move_l_key
-			#elif event.is_action_pressed(move_r_key):
-				#last_pressed_key = move_r_key
-			#elif event.is_action_pressed(block_key):
-				#last_pressed_key = block_key
-			#elif event.is_action_pressed(jump_key):
-				#last_pressed_key = jump_key
-			#elif event.is_action_pressed(grab_key):
-				#last_pressed_key = grab_key
-			#elif event.is_action_pressed(light_atk_key):
-				#last_pressed_key = light_atk_key
-			#elif event.is_action_pressed(heavy_atk_key):
-				#last_pressed_key = heavy_atk_key
-			#elif event.is_action_pressed(special_atk_1_key):
-				#last_pressed_key = special_atk_1_key
-			#elif event.is_action_pressed(special_atk_2_key):
-				#last_pressed_key = special_atk_2_key
-			state_machine.process_input(event)
+	if event is not InputEventMouse:
+		if event is not InputEventJoypadMotion:
+			if event.device == player_id:
+				#if event.is_action_pressed(move_l_key):
+					#last_pressed_key = move_l_key
+				#elif event.is_action_pressed(move_r_key):
+					#last_pressed_key = move_r_key
+				#elif event.is_action_pressed(jump_key):
+					#last_pressed_key = jump_key
+				#elif event.is_action_pressed(crouch_key):
+					#last_pressed_key = crouch_key
+				#elif event.is_action_pressed(grab_key):
+					#last_pressed_key = grab_key
+				#elif event.is_action_pressed(light_atk_key):
+					#last_pressed_key = light_atk_key
+				#elif event.is_action_pressed(heavy_atk_key):
+					#last_pressed_key = heavy_atk_key
+				#elif event.is_action_pressed(special_atk_1_key):
+					#last_pressed_key = special_atk_1_key
+				#elif event.is_action_pressed(special_atk_2_key):
+					#last_pressed_key = special_atk_2_key
+				state_machine.process_input(event, player_id)
 
-func _process(delta): state_machine.process_frame(delta)
+func _process(delta): state_machine.process_frame(delta, player_id)
 
 func _physics_process(delta):
 	velocity.y += gravity * delta
+	determine_forward_direction()
 	move_and_slide()
-	state_machine.process_physics(delta)
+	state_machine.process_physics(delta, player_id)
 
 
 ## Utility Functions
 #region Additional utility functions for the player fighter
+func set_opponent(new_opponent: PlayerFighter) -> void:
+	opponent = new_opponent
+
 func determine_distance_to_opponent() -> float:
-	return opponent.position.x - position.x
+	if opponent:
+		return opponent.position.x - position.x
+	return 0
 
 func determine_forward_direction() -> void:
 	if determine_distance_to_opponent() < 0:
@@ -170,22 +154,7 @@ func clear_last_pressed_key() -> void:
 
 func set_player_id(id: int) -> void:
 	player_id = id
-#endregion
 
-#region Animation Functions. Called by 'method call tracks' within the animation
-func set_current_animation_frame(frame: int) -> void:
-	current_anim_frame = frame
-
-func set_current_animation_frame_info(number_of_frames: int, active_frame_start: int, active_frame_end: int) -> void:
-	current_anim_length = number_of_frames
-	current_anim_active_frames_start = active_frame_start
-	current_anim_active_frames_end = active_frame_end
-
-func set_current_animation_state(current_state: String) -> void:
-	current_anim_state = current_state
-#endregion
-
-#region: Utility Functions
 func add_to_attack_chain(anim_name: String) -> void:
 	prev_attack_chain = attack_chain
 	attack_index += 1
@@ -222,4 +191,18 @@ func is_heavy_attack_anim_playing() -> bool:
 			return false
 	else:
 		return false
+#endregion
+
+## Animaiton Finctions
+#region Animation Functions. Called by 'method call tracks' within the animation
+func set_current_animation_frame(frame: int) -> void:
+	current_anim_frame = frame
+
+func set_current_animation_frame_info(number_of_frames: int, active_frame_start: int, active_frame_end: int) -> void:
+	current_anim_length = number_of_frames
+	current_anim_active_frames_start = active_frame_start
+	current_anim_active_frames_end = active_frame_end
+
+func set_current_animation_state(current_state: String) -> void:
+	current_anim_state = current_state
 #endregion

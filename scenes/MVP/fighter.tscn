@@ -1,15 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://ch7owdppqvpft"]
+[gd_scene load_steps=30 format=3 uid="uid://ch7owdppqvpft"]
 
 [ext_resource type="Script" uid="uid://dt7py11xwpl6w" path="res://scripts/player_fighter/player_fighter.gd" id="1_8g8cl"]
 [ext_resource type="SpriteFrames" uid="uid://c8vtesyqckrwx" path="res://assets/player/fighter/ryu-ONLY-FOR-TESTING.tres" id="1_dmglg"]
-[ext_resource type="Script" uid="uid://u1kciasdne3a" path="res://scripts/state_machine/state_machine.gd" id="3_htdi4"]
-[ext_resource type="Script" uid="uid://kapma3gbvv7o" path="res://scripts/player_fighter/states/player_idle.gd" id="4_htdi4"]
-[ext_resource type="Script" uid="uid://cywq3ox7ha5n1" path="res://scripts/player_fighter/states/player_movement.gd" id="5_jicl2"]
-[ext_resource type="Script" uid="uid://dajtm071fjuha" path="res://scripts/player_fighter/states/player_jump.gd" id="6_wqhd3"]
-[ext_resource type="Script" uid="uid://con4d7dwdegi5" path="res://scripts/player_fighter/states/player_crouch.gd" id="7_3bqbm"]
-[ext_resource type="Script" uid="uid://c2lxks1v5keks" path="res://scripts/player_fighter/states/player_attack_state.gd" id="8_d6lo4"]
-[ext_resource type="Script" uid="uid://noqjc1wlql3" path="res://scripts/player_fighter/states/player_light_attack.gd" id="8_vwl2c"]
-[ext_resource type="Script" uid="uid://d2sly8ffnwfp8" path="res://scripts/player_fighter/states/player_heavy_attack.gd" id="9_ej07l"]
 
 [sub_resource type="Animation" id="Animation_vwl2c"]
 length = 0.0333367
@@ -1110,37 +1102,3 @@ autoplay = "Core Combat Animations/Idle"
 position = Vector2(-6, -141)
 shape = SubResource("RectangleShape2D_sdiyx")
 debug_color = Color(0.43, 0.43, 0.43, 0.439216)
-
-[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("starting_state")]
-script = ExtResource("3_htdi4")
-starting_state = NodePath("S_Idle")
-
-[node name="S_Idle" type="Node2D" parent="StateMachine"]
-scale = Vector2(7, 7)
-script = ExtResource("4_htdi4")
-
-[node name="S_Movement" type="Node2D" parent="StateMachine"]
-script = ExtResource("5_jicl2")
-
-[node name="S_Jump" type="Node2D" parent="StateMachine"]
-script = ExtResource("6_wqhd3")
-
-[node name="S_Crouch" type="Node2D" parent="StateMachine"]
-script = ExtResource("7_3bqbm")
-
-[node name="S_Attack" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("light_attack_state", "heavy_attack_state")]
-script = ExtResource("8_d6lo4")
-light_attack_state = NodePath("S_Light_Attack")
-heavy_attack_state = NodePath("S_Heavy_Attack")
-
-[node name="S_Light_Attack" type="Node2D" parent="StateMachine/S_Attack" node_paths=PackedStringArray("light_attack_state", "heavy_attack_state")]
-script = ExtResource("8_vwl2c")
-light_attack_state = NodePath(".")
-heavy_attack_state = NodePath("../S_Heavy_Attack")
-
-[node name="S_Heavy_Attack" type="Node2D" parent="StateMachine/S_Attack" node_paths=PackedStringArray("light_attack_state", "heavy_attack_state")]
-script = ExtResource("9_ej07l")
-light_attack_state = NodePath("../S_Light_Attack")
-heavy_attack_state = NodePath(".")
-
-[node name="S_Hit" type="Node2D" parent="StateMachine"]
