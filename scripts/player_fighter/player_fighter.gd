@@ -124,24 +124,27 @@ func _physics_process(delta):
 
 ## Utility Functions
 #region Additional utility functions for the player fighter
-func set_opponent(new_opponent: PlayerFighter) -> void:
-	opponent = new_opponent
-
-func determine_distance_to_opponent() -> float:
-	if opponent:
-		return opponent.position.x - position.x
-	return 0
-
 func determine_forward_direction() -> void:
-	if determine_distance_to_opponent() < 0:
-		# on the right (facing left)
-		forward_direction = -1
-		sprite_flipped = true
+	if stage.calc_distance_between_fighters() > 0:
+		# player 1 is on the left
+		if player_id == 0:
+			forward_direction = -1
+			sprite_flipped = true
+		# and player 2 is on the right
+		elif player_id == 1:
+			forward_direction = 1
+			sprite_flipped = false
 	else:
-		# on the left (facing right)
-		forward_direction = 1
-		sprite_flipped = false
-	flip_sprite()
+		# player 1 is on the right
+		if player_id == 0:
+			forward_direction = 1
+			sprite_flipped = false
+		# and player 2 is on the left
+		elif player_id == 1:
+			forward_direction = -1
+			sprite_flipped = true
+	if is_on_floor():
+		flip_sprite()
 
 func flip_sprite() -> void:
 	animated_sprite.set_flip_h(sprite_flipped)

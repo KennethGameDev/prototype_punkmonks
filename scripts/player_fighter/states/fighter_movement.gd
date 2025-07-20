@@ -2,17 +2,26 @@ class_name PlayerMovementState
 extends PlayerState
 
 const SPEED: float = 450
+var state_active: bool = false
+
+func enter() -> void:
+	state_active = true
+	do_move(get_move_dir())
+
+func exit(new_scene: PlayerState = null) -> void:
+	state_active = false
 
 func process_physics(delta: float) -> PlayerState:
 	# TODO: [FIX] New inputs get eaten when rolling into them
-	if Input.is_action_just_pressed(move_l_key) or Input.is_action_just_pressed(move_r_key):
-		state_machine_owner.determine_forward_direction()
-		do_move(get_move_dir())
-	elif get_move_dir() == 0: return idle_state
+	if state_active:
+		if Input.is_action_just_pressed(move_l_key) or Input.is_action_just_pressed(move_r_key):
+			state_machine_owner.determine_forward_direction()
+			do_move(get_move_dir())
+		elif get_move_dir() == 0: return idle_state
 	return null
 #
 func process_input(event: InputEvent) -> PlayerState:
-	if event.is_pressed():
+	if state_active and event.is_pressed():
 		prints(name, event.device, state_machine_owner.name)
 		if event.is_action_pressed(jump_key):
 			return jump_state

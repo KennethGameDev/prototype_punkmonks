@@ -5,13 +5,14 @@
 [ext_resource type="Script" uid="uid://bbmdt4c6kale3" path="res://scripts/stage/fight_camera_controller.gd" id="3_57klg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rdwx7"]
-size = Vector2(184, 766)
+size = Vector2(184, 858)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ddtg"]
-size = Vector2(185, 752)
+size = Vector2(185, 837)
 
 [node name="Stage" type="Node2D" groups=["Stage"]]
 script = ExtResource("1_57klg")
+DEBUGGING = true
 
 [node name="Backdrop" type="TileMapLayer" parent="."]
 z_index = -2
@@ -38,6 +39,7 @@ script = ExtResource("3_57klg")
 
 [node name="Camera2D" type="Camera2D" parent="CameraPos"]
 position = Vector2(0, -175)
+zoom = Vector2(0.9, 0.9)
 
 [node name="CameraBarriers" type="StaticBody2D" parent="CameraPos/Camera2D"]
 position = Vector2(0, 175)
@@ -45,11 +47,11 @@ collision_layer = 256
 collision_mask = 512
 
 [node name="LeftBarrier" type="CollisionShape2D" parent="CameraPos/Camera2D/CameraBarriers"]
-position = Vector2(-688, -179)
+position = Vector2(-752, -184)
 shape = SubResource("RectangleShape2D_rdwx7")
 
 [node name="RightBarrier" type="CollisionShape2D" parent="CameraPos/Camera2D/CameraBarriers"]
-position = Vector2(693.5, -178)
+position = Vector2(752, -177.5)
 shape = SubResource("RectangleShape2D_3ddtg")
 
 [connection signal="pass_player_positions_to_camera" from="." to="CameraPos" method="_on_stage_pass_player_positions_to_camera"]

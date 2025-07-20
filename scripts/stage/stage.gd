@@ -3,6 +3,7 @@ extends Node2D
 @onready var fighter: PackedScene = preload("res://scenes/MVP/fighter.tscn")
 @onready var game_ui: Control = load("res://scenes/MVP/game_ui.tscn").instantiate()
 @onready var camera_pos = $CameraPos
+@onready var game_camera = $CameraPos/Camera2D
 @export var DEBUGGING: bool = false
 @export var start_in_menu: bool = true
 @export var keyboard_allowed: bool = false
@@ -13,7 +14,6 @@ signal controller_connected
 signal controller_disconnected
 signal controller_reconnected
 signal set_current_level_info
-signal pass_opponent_to_player
 signal pass_player_positions_to_camera(player_1: PlayerFighter, player_2: PlayerFighter)
 
 func _ready() -> void:
@@ -29,7 +29,8 @@ func _ready() -> void:
 		}))
 	
 	# Add UI to scene
-	game_ui.position = Vector2(-640, -360 - 146.835)
+	game_ui.scale = game_ui.scale / game_camera.zoom
+	game_ui.position = Vector2(game_camera.position.x - game_camera.get_viewport_rect().size.x / game_camera.zoom.x / 2, game_camera.position.y - game_camera.get_viewport_rect().size.y / game_camera.zoom.y / 2)
 	game_ui.current_level_name = name
 	game_ui.start_in_main_menu = start_in_menu
 	if start_in_menu:
@@ -101,23 +102,23 @@ func add_player(player_index: int) -> void:
 		var crouch_action: String
 		var crouch_action_event: InputEventJoypadButton
 		
-		#var light_attack_action: String
-		#var light_attack_action_event: InputEventJoypadButton
-		#
-		#var heavy_attack_action: String
-		#var heavy_attack_action_event: InputEventJoypadButton
-		#
-		#var special_attack_action: String
-		#var special_attack_action_event: InputEventJoypadButton
-		#
-		#var use_item_action: String
-		#var use_item_action_event: InputEventJoypadButton
-		#
-		#var block_action: String
-		#var block_action_event: InputEventJoypadButton
-		#
-		#var grab_action: String
-		#var grab_action_event: InputEventJoypadButton
+		var light_attack_action: String
+		var light_attack_action_event: InputEventJoypadButton
+		
+		var heavy_attack_action: String
+		var heavy_attack_action_event: InputEventJoypadButton
+		
+		var special_attack_action: String
+		var special_attack_action_event: InputEventJoypadButton
+		
+		var use_item_action: String
+		var use_item_action_event: InputEventJoypadButton
+		
+		var block_action: String
+		var block_action_event: InputEventJoypadButton
+		
+		var grab_action: String
+		var grab_action_event: InputEventJoypadButton
 		#endregion
 		#region Set the above actions and events and add them to the input map
 		move_left_action = "f_move_left{n}".format({"n": player_index})
@@ -148,47 +149,47 @@ func add_player(player_index: int) -> void:
 		crouch_action_event.button_index = JOY_BUTTON_DPAD_DOWN
 		InputMap.action_add_event(crouch_action, crouch_action_event)
 		
-		#light_attack_action = "f_light_attack{n}".format({"n": player_index})
-		#InputMap.add_action(light_attack_action)
-		#light_attack_action_event = InputEventJoypadButton.new()
-		#light_attack_action_event.device = player_index
-		#light_attack_action_event.button_index = JOY_BUTTON_X
-		#InputMap.action_add_event(light_attack_action, light_attack_action_event)
-		#
-		#heavy_attack_action = "f_heavy_attack{n}".format({"n": player_index})
-		#InputMap.add_action(heavy_attack_action)
-		#heavy_attack_action_event = InputEventJoypadButton.new()
-		#heavy_attack_action_event.device = player_index
-		#heavy_attack_action_event.button_index = JOY_BUTTON_A
-		#InputMap.action_add_event(heavy_attack_action, heavy_attack_action_event)
-		#
-		#special_attack_action = "f_special_attack{n}".format({"n": player_index})
-		#InputMap.add_action(special_attack_action)
-		#special_attack_action_event = InputEventJoypadButton.new()
-		#special_attack_action_event.device = player_index
-		#special_attack_action_event.button_index = JOY_BUTTON_Y
-		#InputMap.action_add_event(special_attack_action, special_attack_action_event)
-		#
-		#use_item_action = "f_use_item{n}".format({"n": player_index})
-		#InputMap.add_action(use_item_action)
-		#use_item_action_event = InputEventJoypadButton.new()
-		#use_item_action_event.device = player_index
-		#use_item_action_event.button_index = JOY_BUTTON_B
-		#InputMap.action_add_event(use_item_action, use_item_action_event)
-		#
-		#block_action = "f_block{n}".format({"n": player_index})
-		#InputMap.add_action(block_action)
-		#block_action_event = InputEventJoypadButton.new()
-		#block_action_event.device = player_index
-		#block_action_event.button_index = JOY_BUTTON_RIGHT_SHOULDER
-		#InputMap.action_add_event(block_action, block_action_event)
-		#
-		#grab_action = "f_grab{n}".format({"n": player_index})
-		#InputMap.add_action(grab_action)
-		#grab_action_event = InputEventJoypadButton.new()
-		#grab_action_event.device = player_index
-		#grab_action_event.button_index = JOY_BUTTON_LEFT_SHOULDER
-		#InputMap.action_add_event(grab_action, grab_action_event)
+		light_attack_action = "f_light_attack{n}".format({"n": player_index})
+		InputMap.add_action(light_attack_action)
+		light_attack_action_event = InputEventJoypadButton.new()
+		light_attack_action_event.device = player_index
+		light_attack_action_event.button_index = JOY_BUTTON_X
+		InputMap.action_add_event(light_attack_action, light_attack_action_event)
+		
+		heavy_attack_action = "f_heavy_attack{n}".format({"n": player_index})
+		InputMap.add_action(heavy_attack_action)
+		heavy_attack_action_event = InputEventJoypadButton.new()
+		heavy_attack_action_event.device = player_index
+		heavy_attack_action_event.button_index = JOY_BUTTON_A
+		InputMap.action_add_event(heavy_attack_action, heavy_attack_action_event)
+		
+		special_attack_action = "f_special_attack{n}".format({"n": player_index})
+		InputMap.add_action(special_attack_action)
+		special_attack_action_event = InputEventJoypadButton.new()
+		special_attack_action_event.device = player_index
+		special_attack_action_event.button_index = JOY_BUTTON_Y
+		InputMap.action_add_event(special_attack_action, special_attack_action_event)
+		
+		use_item_action = "f_use_item{n}".format({"n": player_index})
+		InputMap.add_action(use_item_action)
+		use_item_action_event = InputEventJoypadButton.new()
+		use_item_action_event.device = player_index
+		use_item_action_event.button_index = JOY_BUTTON_B
+		InputMap.action_add_event(use_item_action, use_item_action_event)
+		
+		block_action = "f_block{n}".format({"n": player_index})
+		InputMap.add_action(block_action)
+		block_action_event = InputEventJoypadButton.new()
+		block_action_event.device = player_index
+		block_action_event.button_index = JOY_BUTTON_RIGHT_SHOULDER
+		InputMap.action_add_event(block_action, block_action_event)
+		
+		grab_action = "f_grab{n}".format({"n": player_index})
+		InputMap.add_action(grab_action)
+		grab_action_event = InputEventJoypadButton.new()
+		grab_action_event.device = player_index
+		grab_action_event.button_index = JOY_BUTTON_LEFT_SHOULDER
+		InputMap.action_add_event(grab_action, grab_action_event)
 		#endregion
 		#endregion
 	else:
@@ -201,5 +202,9 @@ func add_player(player_index: int) -> void:
 	elif player_index == 1:
 		move_child(player, 4)
 		emit_signal("pass_player_positions_to_camera", players[0], players[1])
-		#emit_signal("pass_opponent_to_player", players[0].set_opponent(players[1]))
-		#emit_signal("pass_opponent_to_player", players[1].set_opponent(players[0]))
+		calc_distance_between_fighters()
+
+func calc_distance_between_fighters() -> float:
+	if players.size() == 2:
+		return players[0].position.x - players[1].position.x
+	return 0

@@ -15,8 +15,6 @@ func _ready():
 			"n": name,
 			"j": Input.get_connected_joypads()
 		}))
-		print("Joypad 0 device name: {n}".format({"n": Input.get_joy_name(0)}))
-		print("Joypad 1 device name: {n}".format({"n": Input.get_joy_name(1)}))
 		print("Parent of '{n}' is '{p}' (Expect 'root')".format({
 			"n": name,
 			"p": get_parent().name

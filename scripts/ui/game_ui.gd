@@ -121,6 +121,7 @@ func swap_menu_to_previous() -> void:
 	go_back_list.pop_back()
 
 func on_swap_scene(new_scene: PackedScene) -> void:
+	game_started_once = false
 	get_tree().paused = start_in_main_menu
 	get_tree().root.get_child(0).queue_free()
 	get_tree().root.add_child(new_scene.instantiate())
