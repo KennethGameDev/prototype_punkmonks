@@ -10,6 +10,7 @@ var connected_controllers: Array
 var level: Node2D
 
 func _ready():
+	# DEBUGGING: Print all connected controllers and their owners to the console
 	if DEBUGGING:
 		print("Running {n}._ready()... connected joypads: {j}".format({
 			"n": name,
@@ -35,6 +36,7 @@ func _ready():
 		print("Error {e} connecting 'Input' signal 'joy_connection_changed'.".format({"e": _ret}))
 
 func _on_joy_connection_changed(device: int, connected: bool) -> void:
+	# DEBUGGING: Print new connections/disconnections to the console
 	if DEBUGGING:
 		if connected:
 			print("Connected to device {d}.".format({"d": device}))

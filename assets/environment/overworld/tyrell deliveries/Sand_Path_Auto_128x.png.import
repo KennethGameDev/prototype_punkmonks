@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0j6swuleqj75"
-path="res://.godot/imported/Grass-Sheet-4x.png-abd95ee4de98638194999f2d22bc571e.ctex"
+uid="uid://cxdruqo2gttue"
+path="res://.godot/imported/Sand_Path_Auto_128x.png-40ba2a81a28c3e23f1a9873faca4092b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/environment/overworld/Grass-Sheet-4x.png"
-dest_files=["res://.godot/imported/Grass-Sheet-4x.png-abd95ee4de98638194999f2d22bc571e.ctex"]
+source_file="res://assets/environment/overworld/tyrell deliveries/Sand_Path_Auto_128x.png"
+dest_files=["res://.godot/imported/Sand_Path_Auto_128x.png-40ba2a81a28c3e23f1a9873faca4092b.ctex"]
 
 [params]
 

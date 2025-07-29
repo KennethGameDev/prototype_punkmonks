@@ -5,11 +5,12 @@ extends Node2D
 @export var DEBUGGING: bool = false
 @export var start_in_menu: bool = true
 var num_players: int
+var tile_map_layers: Dictionary
 signal set_current_level_info
 
 
 func _ready() -> void:
-	# Inherit parent.DEBUGGING if this scene is not the entry point.
+	# DEBUGGING: Inherit parent.DEBUGGING if this scene is not the entry point.
 	var parent_node: Node = get_parent()
 	if parent_node.name != "root":
 		DEBUGGING = parent_node.DEBUGGING
@@ -19,6 +20,13 @@ func _ready() -> void:
 			"n": name,
 			"p": get_parent().name
 		}))
+	
+	# Set up tile map layers
+	var i: int = 0
+	while i < get_children().size():
+		if get_child(i).is_class("TileMapLayer"):
+			tile_map_layers.get_or_add(get_child(i), i)
+		i += 1
 	
 	game_ui.scale = game_ui.scale / game_camera.zoom
 	game_ui.position = Vector2(game_camera.position.x - game_camera.get_viewport_rect().size.x / game_camera.zoom.x / 2, game_camera.position.y - game_camera.get_viewport_rect().size.y / game_camera.zoom.y / 2)
@@ -33,3 +41,5 @@ func add_player(device: int) -> void:
 
 func remove_player(device: int) -> void:
 	pass
+
+# TODO: Based on the layer the player is currently on, progressively blur/zoom out/darken the layers below just enough to fake a sense of depth

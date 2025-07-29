@@ -55,7 +55,7 @@ func get_interactable() -> Node2D:
 	#interactable.get_node()
 	return interactable
 
-
+# BUG: None of these check for specific collision layers
 func _on_Up_collision_body_entered(_body: Node2D) -> void:
 	valid_directions["Up"] = false
 	prints(get_parent().name, "detected Collision (UP direction):", _body.name)

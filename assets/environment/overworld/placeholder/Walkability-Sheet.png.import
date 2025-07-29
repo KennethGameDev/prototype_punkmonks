@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnfjh0wcgk1u4"
-path="res://.godot/imported/TestHouse-Sheet-2x.png-79f8ee6f9ac4c19e63b003e3bd392e29.ctex"
+uid="uid://dnv4sfqf5j780"
+path="res://.godot/imported/Walkability-Sheet.png-e265893be61334c4103c2272a98201ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/environment/overworld/TestHouse-Sheet-2x.png"
-dest_files=["res://.godot/imported/TestHouse-Sheet-2x.png-79f8ee6f9ac4c19e63b003e3bd392e29.ctex"]
+source_file="res://assets/environment/overworld/placeholder/Walkability-Sheet.png"
+dest_files=["res://.godot/imported/Walkability-Sheet.png-e265893be61334c4103c2272a98201ad.ctex"]
 
 [params]
 

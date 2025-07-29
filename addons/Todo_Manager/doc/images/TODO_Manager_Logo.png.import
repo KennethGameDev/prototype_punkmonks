@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy4yg3j0o3jne"
-path="res://.godot/imported/TestFurniture-Sheet-2x.png-ba030498bc846a9a3bdb4d7d24b16511.ctex"
+uid="uid://dn7mwbmxk6x7y"
+path="res://.godot/imported/TODO_Manager_Logo.png-e07d7ec75201c66b732ef87ec1bece15.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/environment/overworld/TestFurniture-Sheet-2x.png"
-dest_files=["res://.godot/imported/TestFurniture-Sheet-2x.png-ba030498bc846a9a3bdb4d7d24b16511.ctex"]
+source_file="res://addons/Todo_Manager/doc/images/TODO_Manager_Logo.png"
+dest_files=["res://.godot/imported/TODO_Manager_Logo.png-e07d7ec75201c66b732ef87ec1bece15.ctex"]
 
 [params]
 

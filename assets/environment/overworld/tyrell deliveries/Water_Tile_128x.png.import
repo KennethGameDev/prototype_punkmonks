@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byol1xgpgl3ge"
-path="res://.godot/imported/Grass-Sheet.png-d14853ca57c51c8e0b7cfed71eabe8f6.ctex"
+uid="uid://bm556spop0rnl"
+path="res://.godot/imported/Water_Tile_128x.png-199fe1b5bab8fd3ae9fc20084ab37b9d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/environment/overworld/Grass-Sheet.png"
-dest_files=["res://.godot/imported/Grass-Sheet.png-d14853ca57c51c8e0b7cfed71eabe8f6.ctex"]
+source_file="res://assets/environment/overworld/tyrell deliveries/Water_Tile_128x.png"
+dest_files=["res://.godot/imported/Water_Tile_128x.png-199fe1b5bab8fd3ae9fc20084ab37b9d.ctex"]
 
 [params]
 

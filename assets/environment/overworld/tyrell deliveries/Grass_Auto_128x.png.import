@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnv4sfqf5j780"
-path="res://.godot/imported/Walkability-Sheet.png-7c1ba389ea8d1e9734c1ba2d13234397.ctex"
+uid="uid://bea6dgp7taqoa"
+path="res://.godot/imported/Grass_Auto_128x.png-eae2041592b36d0fb84e770b689b7454.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/environment/overworld/Walkability-Sheet.png"
-dest_files=["res://.godot/imported/Walkability-Sheet.png-7c1ba389ea8d1e9734c1ba2d13234397.ctex"]
+source_file="res://assets/environment/overworld/tyrell deliveries/Grass_Auto_128x.png"
+dest_files=["res://.godot/imported/Grass_Auto_128x.png-eae2041592b36d0fb84e770b689b7454.ctex"]
 
 [params]
 

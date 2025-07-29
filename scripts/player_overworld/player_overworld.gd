@@ -23,12 +23,20 @@ var target_tile_location: Vector2 # the location of that tile
 var distance_to_target: float # the distance to the target tile in pixels
 var obstruction_detected: bool # allows/disallows movement based on obstacles
 var moving_towards_target: bool # signals if the player is already moving or not
+var movement_key_active: bool
 
 
 func _ready() -> void:
 	# Centers the player on the tile they're on when loading in
 	current_tile = navigation_layer.local_to_map(global_position)
 	position = navigation_layer.map_to_local(current_tile)
+
+
+func _input(event) -> void:
+	if event.is_action_pressed("move_forward") or event.is_action_pressed("move_back") or event.is_action_pressed("move_left") or event.is_action_pressed("move_right"):
+		movement_key_active = true
+	else:
+		movement_key_active = false
 
 
 func _physics_process(delta: float) -> void:
@@ -222,8 +230,10 @@ func move() -> void:
 			# We have reached the target location, set the player's position to the
 			# center of the tile
 			position = navigation_layer.map_to_local(target_tile)
-			# reset velocity
-			velocity = Vector2.ZERO
+			# EXPERIMENTAL: just wanna see if this works
+			if !movement_key_active:
+				# reset velocity
+				velocity = Vector2.ZERO
 			# and allow movement again
 			if moving_towards_target:
 				moving_towards_target = false

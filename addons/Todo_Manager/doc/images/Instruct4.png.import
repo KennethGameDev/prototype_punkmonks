@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt0vmso1ehen"
-path="res://.godot/imported/Dirt-Sheet.png-b09d2d370ef2c297278e89f5df1ecbae.ctex"
+uid="uid://biiyj1ssvyepp"
+path="res://.godot/imported/Instruct4.png-bf5aa1cffc066175cecf9281b0774809.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/environment/overworld/Dirt-Sheet.png"
-dest_files=["res://.godot/imported/Dirt-Sheet.png-b09d2d370ef2c297278e89f5df1ecbae.ctex"]
+source_file="res://addons/Todo_Manager/doc/images/Instruct4.png"
+dest_files=["res://.godot/imported/Instruct4.png-bf5aa1cffc066175cecf9281b0774809.ctex"]
 
 [params]
 

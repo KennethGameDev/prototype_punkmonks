@@ -11,8 +11,7 @@ size = Vector2(127.5, 127.5)
 size = Vector2(127, 127)
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 17
+collision_layer = 8
 script = ExtResource("1_iuw3c")
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="."]
@@ -23,7 +22,7 @@ script = ExtResource("2_5aguw")
 
 [node name="UpCollision" type="Area2D" parent="Detectors"]
 collision_layer = 0
-collision_mask = 17
+collision_mask = 22
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/UpCollision"]
 position = Vector2(0, -128)
@@ -32,7 +31,7 @@ debug_color = Color(0.85, 0.7072, 0.136, 0.215686)
 
 [node name="DownCollision" type="Area2D" parent="Detectors"]
 collision_layer = 0
-collision_mask = 17
+collision_mask = 22
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/DownCollision"]
 position = Vector2(0, 128)
@@ -41,7 +40,7 @@ debug_color = Color(0.85, 0.7072, 0.136, 0.215686)
 
 [node name="RightCollision" type="Area2D" parent="Detectors"]
 collision_layer = 0
-collision_mask = 17
+collision_mask = 22
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/RightCollision"]
 position = Vector2(128, 0)
@@ -50,7 +49,7 @@ debug_color = Color(0.85, 0.7072, 0.136, 0.215686)
 
 [node name="LeftCollision" type="Area2D" parent="Detectors"]
 collision_layer = 0
-collision_mask = 17
+collision_mask = 22
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/LeftCollision"]
 position = Vector2(-128, 0)
@@ -59,7 +58,7 @@ debug_color = Color(0.85, 0.7072, 0.136, 0.215686)
 
 [node name="Interaction" type="Area2D" parent="Detectors"]
 collision_layer = 0
-collision_mask = 24
+collision_mask = 96
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectors/Interaction"]
 shape = SubResource("RectangleShape2D_bjbbp")
