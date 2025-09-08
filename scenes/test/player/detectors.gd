@@ -58,7 +58,7 @@ func get_interactable() -> Node2D:
 # BUG: None of these check for specific collision layers
 func _on_Up_collision_body_entered(_body: Node2D) -> void:
 	valid_directions["Up"] = false
-	prints(get_parent().name, "detected Collision (UP direction):", _body.name)
+	prints("detected:", _body.get_parent().name, "up")
 
 func _on_Up_collision_body_exited(_body: Node2D) -> void:
 	valid_directions["Up"] = true
@@ -66,7 +66,7 @@ func _on_Up_collision_body_exited(_body: Node2D) -> void:
 
 func _on_Down_collision_body_entered(_body: Node2D) -> void:
 	valid_directions["Down"] = false
-	prints(get_parent().name, "detected Collision (DOWN direction):", _body.name)
+	prints("detected:", _body.get_parent().name, "down")
 
 func _on_Down_collision_body_exited(_body: Node2D) -> void:
 	valid_directions["Down"] = true
@@ -74,7 +74,7 @@ func _on_Down_collision_body_exited(_body: Node2D) -> void:
 
 func _on_Right_collision_body_entered(_body: Node2D) -> void:
 	valid_directions["Right"] = false
-	prints(get_parent().name, "detected Collision (RIGHT direction):", _body.name)
+	prints("detected:", _body.get_parent().name, "right")
 
 func _on_Right_collision_body_exited(_body: Node2D) -> void:
 	valid_directions["Right"] = true
@@ -82,7 +82,7 @@ func _on_Right_collision_body_exited(_body: Node2D) -> void:
 
 func _on_Left_collision_body_entered(_body: Node2D) -> void:
 	valid_directions["Left"] = false
-	prints(get_parent().name, "detected Collision (LEFT direction):", _body.name)
+	prints("detected:", _body.get_parent().name, "left")
 
 func _on_Left_collision_body_exited(_body: Node2D) -> void:
 	valid_directions["Left"] = true

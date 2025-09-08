@@ -23,20 +23,12 @@ var target_tile_location: Vector2 # the location of that tile
 var distance_to_target: float # the distance to the target tile in pixels
 var obstruction_detected: bool # allows/disallows movement based on obstacles
 var moving_towards_target: bool # signals if the player is already moving or not
-var movement_key_active: bool
 
 
 func _ready() -> void:
 	# Centers the player on the tile they're on when loading in
 	current_tile = navigation_layer.local_to_map(global_position)
 	position = navigation_layer.map_to_local(current_tile)
-
-
-func _input(event) -> void:
-	if event.is_action_pressed("move_forward") or event.is_action_pressed("move_back") or event.is_action_pressed("move_left") or event.is_action_pressed("move_right"):
-		movement_key_active = true
-	else:
-		movement_key_active = false
 
 
 func _physics_process(delta: float) -> void:
@@ -67,6 +59,7 @@ func transition_to_state(new_state: String) -> void:
 
 
 func talk_state() -> void:
+	# TODO: Add a check for an interactable
 	print("Works so far, but needs a check for an interactable.")
 	transition_to_state("idle")
 
@@ -227,13 +220,11 @@ func move() -> void:
 			move_and_slide()
 		# Else, the player's target distance is 8 pixels or less
 		else:
-			# We have reached the target location, set the player's position to the
-			# center of the tile
+			# We have reached the target location
+			# set the player's position to the center of the tile
 			position = navigation_layer.map_to_local(target_tile)
-			# EXPERIMENTAL: just wanna see if this works
-			if !movement_key_active:
-				# reset velocity
-				velocity = Vector2.ZERO
+			# reset velocity
+			velocity = Vector2.ZERO
 			# and allow movement again
 			if moving_towards_target:
 				moving_towards_target = false
@@ -251,6 +242,3 @@ func set_interaction_detector_position(interact_direction: Vector2) -> void:
 			interact_detector.position = Vector2(-128, 0)
 		Vector2.RIGHT:
 			interact_detector.position = Vector2(128, 0)
-
-
-#func get_interactable_type() -> 

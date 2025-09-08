@@ -8,3 +8,11 @@ extends Node2D
 # TODO: A function that takes in a layer index, a Vector2D direction, and a speed, and gradually moves the layer in that direction at speed as long as the function is being called
 # TODO: A function that can apply a shader(?) that can gradually darken a selected layer
 # TODO: Any additional effects we need/want later
+
+func _ready() -> void:
+	for elevation_level: Node2D in get_children():
+		for tile_map_layer: TileMapLayer in elevation_level.get_children():
+			# TODO: If the player's current elevation is equal to the layer's, disable ground collision for those layers
+			if elevation_level.name == "Elevation 01":
+				tile_map_layer.collision_enabled = false
+			pass

@@ -21,6 +21,7 @@ func _ready() -> void:
 			"p": get_parent().name
 		}))
 	
+	# TODO: Change to elevations
 	# Set up tile map layers
 	var i: int = 0
 	while i < get_children().size():
@@ -36,6 +37,7 @@ func _ready() -> void:
 	emit_signal("set_current_level_info")
 	game_camera.add_child(game_ui)
 
+# TODO: Make these functional
 func add_player(device: int) -> void:
 	pass
 
